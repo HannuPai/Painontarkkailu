@@ -5,7 +5,6 @@
 package painontarkkailu;
 
 import java.io.IOException;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +26,9 @@ public class LisaaHarjoiteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String kayttaja = request.getParameter("kayttajaId");
-        Date paivays = new java.util.Date();
+        long kayttajaId = Long.parseLong(request.getParameter("kayttajaId"));
+        Kayttaja kayttaja = rekisteri.haeKayttaja(kayttajaId);
+        String paivays = request.getParameter("paivays");
         double kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
         String saa = request.getParameter("saa");
         String kommentti = request.getParameter("kommentti");

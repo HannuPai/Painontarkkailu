@@ -23,7 +23,7 @@ public class Harjoite implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column
-    private Date paivays;
+    private String paivays;
     @Column
     private double kestoMinuuteissa;
     @Column
@@ -39,7 +39,7 @@ public class Harjoite implements Serializable {
     public Harjoite() {
     }
 
-    Harjoite(String kayttaja, Date paivays, double kestoMinuuteissa, String saa, String kommentti, int syke) {
+    Harjoite(Kayttaja kayttaja, String paivays, double kestoMinuuteissa, String saa, String kommentti, int syke) {
         
         this.paivays = paivays;
         this.kestoMinuuteissa = kestoMinuuteissa;
@@ -80,11 +80,11 @@ public class Harjoite implements Serializable {
         this.kommentti = kommentti;
     }
 
-    public Date getPaivays() {
+    public String getPaivays() {
         return paivays;
     }
 
-    public void setPaivays(Date paivays) {
+    public void setPaivays(String paivays) {
         this.paivays = paivays;
     }
 

@@ -48,6 +48,11 @@ public class Rekisteri {
         return q.getResultList();
     }
     
+    public Kayttaja haeKayttaja(long kayttajaId) {
+        EntityManager em = getEntityManager();
+        return em.find(Kayttaja.class, kayttajaId);
+    }
+    
     public void lisaaKayttaja(Kayttaja kayttaja){
         EntityManager em = getEntityManager();
 

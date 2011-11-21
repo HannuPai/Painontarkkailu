@@ -23,6 +23,7 @@
                   action="${pageContext.request.contextPath}/LisaaHarjoite"
                   method="post">
                 KestoMinuuteissa: <input type="text" name="kestoMinuuteissa"/> <br/>
+                Päiväys: <input type="text" name="paivays"/> <br/>
                 Sää: <input type="text" name="saa"/> <br/>
                 Syke: <input type="text" name="syke"/> <br/>
                 Kommentti: <input type="text" name="kommentti"/> <br/>
