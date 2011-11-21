@@ -16,16 +16,19 @@
         <h1>Hello ${viesti}!</h1>
         
         <!-- testataan onko attribuutti "kayttajat" tyhjä //-->
-        <c:if test="${not empty kayttajat}">
+        <c:if test="${not empty lista}">
 
             <!-- jos kayttajat ei ole tyhjä, annetaan mahdollisuus luoda uusia harjotteita //-->
             <form name="uusiHarjoite"
                   action="${pageContext.request.contextPath}/LisaaHarjoite"
                   method="post">
+                KestoMinuuteissa: <input type="text" name="kestoMinuuteissa"/> <br/>
+                Sää: <input type="text" name="saa"/> <br/>
+                Syke: <input type="text" name="syke"/> <br/>
                 Kommentti: <input type="text" name="kommentti"/> <br/>
-                Kayttaja: <!-- uimarille pitää valita myös uimaseura //-->
+                Kayttaja: <!-- harjoitteelle pitää valita myös käyttäjä //-->
                 <select name="kayttajaId">
-                    <c:forEach var="kayttaja" items="${kayttajat}">
+                    <c:forEach var="kayttaja" items="${lista}">
                         <option value="${kayttaja.id}">${kayttaja.nimi}</option>
                     </c:forEach>
                 </select><br/>

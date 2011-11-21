@@ -17,6 +17,10 @@
         <servlet-name>LisaaKayttajaServlet</servlet-name>
         <servlet-class>painontarkkailu.LisaaKayttajaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LisaaHarjoiteServlet</servlet-name>
+        <servlet-class>painontarkkailu.LisaaHarjoiteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -28,6 +32,10 @@
     <servlet-mapping>
         <servlet-name>LisaaKayttajaServlet</servlet-name>
         <url-pattern>/LisaaKayttaja</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LisaaHarjoiteServlet</servlet-name>
+        <url-pattern>/LisaaHarjoite</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

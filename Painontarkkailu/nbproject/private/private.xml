@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/web/lista.jsp</file>
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/src/java/painontarkkailu/LisaaKayttajaServlet.java</file>
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/src/java/painontarkkailu/LisaaHarjoiteServlet.java</file>
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/src/java/painontarkkailu/Harjoite.java</file>
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/src/java/painontarkkailu/Rekisteri.java</file>
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/src/java/painontarkkailu/Kayttaja.java</file>
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/src/conf/persistence.xml</file>
+        <file>file:/C:/Koulu/Tsoha/github/Painontarkkailu/src/java/painontarkkailu/ListaServlet.java</file>
+    </open-files>
 </project-private>

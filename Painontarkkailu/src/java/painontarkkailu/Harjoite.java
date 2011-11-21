@@ -5,8 +5,7 @@
 package painontarkkailu;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,7 @@ public class Harjoite implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column
-    private Timestamp paivays;
+    private Date paivays;
     @Column
     private double kestoMinuuteissa;
     @Column
@@ -36,6 +35,18 @@ public class Harjoite implements Serializable {
 
     @JoinColumn
     private Kayttaja kayttaja;
+
+    public Harjoite() {
+    }
+
+    Harjoite(String kayttaja, Date paivays, double kestoMinuuteissa, String saa, String kommentti, int syke) {
+        
+        this.paivays = paivays;
+        this.kestoMinuuteissa = kestoMinuuteissa;
+        this.saa = saa;
+        this.kommentti = kommentti;
+        this.syke = syke;
+    }
 
     public Kayttaja getKayttaja() {
         return kayttaja;
@@ -69,11 +80,11 @@ public class Harjoite implements Serializable {
         this.kommentti = kommentti;
     }
 
-    public Timestamp getPaivays() {
+    public Date getPaivays() {
         return paivays;
     }
 
-    public void setPaivays(Timestamp paivays) {
+    public void setPaivays(Date paivays) {
         this.paivays = paivays;
     }
 
