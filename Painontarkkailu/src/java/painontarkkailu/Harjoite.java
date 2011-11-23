@@ -5,13 +5,14 @@
 package painontarkkailu;
 
 import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Harjoite implements Serializable {
     @Column
     private int syke;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     private Kayttaja kayttaja;
 
@@ -40,7 +42,7 @@ public class Harjoite implements Serializable {
     }
 
     Harjoite(Kayttaja kayttaja, String paivays, double kestoMinuuteissa, String saa, String kommentti, int syke) {
-        
+       // this.kayttaja = kayttaja;
         this.paivays = paivays;
         this.kestoMinuuteissa = kestoMinuuteissa;
         this.saa = saa;
@@ -54,6 +56,9 @@ public class Harjoite implements Serializable {
 
     public void setKayttaja(Kayttaja kayttaja) {
         this.kayttaja = kayttaja;
+        if (!kayttaja.getHarjoitteet().contains(this)) {
+            kayttaja.getHarjoitteet().add(this);
+        }
     }
     
     public long getId() {

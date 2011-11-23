@@ -37,8 +37,8 @@ public class Rekisteri {
         Query q = em.createQuery(cq);
 
         return q.getResultList();
-        //return em.createQuery("SELECT k FROM Kayttaja k").getResultList();
-    }
+        }
+    
     public List<Kayttaja> getHarjoitteet(){
         EntityManager em = getEntityManager();
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -59,7 +59,7 @@ public class Rekisteri {
 	// aloitetaan transaktio
         em.getTransaction().begin();
 	// tallennetaan kayttaja
-        em.persist(kayttaja);
+        em.merge(kayttaja);
 	// lopetetaan transaktio sanomalla commit
         em.getTransaction().commit();
     }
@@ -70,7 +70,7 @@ public class Rekisteri {
 	// aloitetaan transaktio
         em.getTransaction().begin();
 	// tallennetaan harjoite
-        em.persist(uusi);
+        em.merge(uusi);
 	// lopetetaan transaktio sanomalla commit
         em.getTransaction().commit();
     }

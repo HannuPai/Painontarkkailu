@@ -5,11 +5,15 @@
 package painontarkkailu;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -34,7 +38,13 @@ public class Kayttaja implements Serializable {
     private int pituus;
     @Column
     private double paino;
-   
+    
+    @OneToMany
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "kayttaja_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "harjoite_id")})
+    private List<Harjoite> harjoitteet;
     
     public Kayttaja() {
     }
@@ -46,6 +56,14 @@ public class Kayttaja implements Serializable {
         this.sukupuoli = sukupuoli;
         this.pituus = pituus;
         this.paino = paino;
+    }
+
+    public List<Harjoite> getHarjoitteet() {
+        return harjoitteet;
+    }
+
+    public void setHarjoitteet(List<Harjoite> harjoitteet) {
+        this.harjoitteet = harjoitteet;
     }
     
     public long getId() {
