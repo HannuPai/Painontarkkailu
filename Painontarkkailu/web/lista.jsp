@@ -14,36 +14,40 @@
     </head>
     <body>
         <h1>Hello ${viesti}!</h1>
-        
+        <a href="../Painontarkkailu">Painontarkkailu</a>
         <!-- testataan onko attribuutti "kayttajat" tyhjä //-->
         <c:if test="${not empty lista}">
-
-            <h2>Harjoite</h2>
+            <h2>Uusi harjoite</h2>
             <!-- jos kayttajat ei ole tyhjä, annetaan mahdollisuus luoda uusia harjotteita //-->
             <form name="uusiHarjoite"
                   action="${pageContext.request.contextPath}/LisaaHarjoite"
                   method="post">
-                KestoMinuuteissa: <input type="text" name="kestoMinuuteissa"/> <br/>
-                Päiväys: <input type="text" name="paivays"/> <br/>
-                Sää: <input type="text" name="saa"/> <br/>
-                Syke: <input type="text" name="syke"/> <br/>
-                Kommentti: <input type="text" name="kommentti"/> <br/>
                 Kayttaja: <!-- harjoitteelle pitää valita myös käyttäjä //-->
                 <select name="kayttajaId">
                     <c:forEach var="kayttaja" items="${lista}">
                         <option value="${kayttaja.id}">${kayttaja.nimi}</option>
                     </c:forEach>
                 </select><br/>
-
+                Laji: <!-- harjoitteelle pitää valita myös laji //-->
+                <select name="lajiId">
+                    <c:forEach var="laji" items="${listaLaji}">
+                        <option value="${laji.id}">${laji.nimi}</option>
+                    </c:forEach>
+                </select><br/>
+                KestoMinuuteissa: <input type="text" name="kestoMinuuteissa"/> <br/>
+                Päiväys: <input type="text" name="paivays"/> <br/>
+                Sää: <input type="text" name="saa"/> <br/>
+                Syke: <input type="text" name="syke"/> <br/>
+                Kommentti: <input type="text" name="kommentti"/> <br/>
                 <input type="submit" value="Lähetä"/>
-            </form>
-                  
+            </form>      
         </c:if>
         
         <c:forEach var="kayttaja" items="${lista}" >
             ${kayttaja.nimi} <br/>
         </c:forEach>
             
+            <h2>Uusi käyttäjä</h2>
             <form name="uusiKayttaja"
                   action="${pageContext.request.contextPath}/LisaaKayttaja"
                   method="post">
@@ -55,5 +59,17 @@
                 Paino: <input type="text" name="paino" /> <br/>
                 <input type="submit" name="Lähetä"/>
             </form>
+        <c:forEach var="laji" items="${listaLaji}" >
+            ${laji.nimi} <br/>
+        </c:forEach>
+            
+            <h2>Uusi laji</h2>
+            <form name="uusiLaji"
+                  action="${pageContext.request.contextPath}/LisaaLaji"
+                  method="post">
+                Nimi: <input type="text" name="nimi" /> <br/>
+                Kulutus: <input type="text" name="kulutus" /> <br/>
+                <input type="submit" name="Lähetä"/>
+         </form>
     </body>
 </html>

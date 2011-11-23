@@ -38,11 +38,16 @@ public class Harjoite implements Serializable {
     @JoinColumn
     private Kayttaja kayttaja;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn
+    private Laji laji;
+
     public Harjoite() {
     }
 
-    Harjoite(Kayttaja kayttaja, String paivays, double kestoMinuuteissa, String saa, String kommentti, int syke) {
-       // this.kayttaja = kayttaja;
+    Harjoite(Kayttaja kayttaja, Laji laji, String paivays, double kestoMinuuteissa, String saa, String kommentti, int syke) {
+        this.kayttaja = kayttaja;
+        this.laji = laji;
         this.paivays = paivays;
         this.kestoMinuuteissa = kestoMinuuteissa;
         this.saa = saa;

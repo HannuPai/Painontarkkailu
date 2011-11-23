@@ -48,6 +48,11 @@ public class Rekisteri {
         return q.getResultList();
     }
     
+    /**
+     * Etsii ja palauttaa käyttäjän käyttäjäId:n perusteella
+     * @param lajiId Etsittävän käyttäjän ID-tunnus
+     * @return Etsitty käyttäjä
+     */
     public Kayttaja haeKayttaja(long kayttajaId) {
         EntityManager em = getEntityManager();
         return em.find(Kayttaja.class, kayttajaId);
@@ -64,6 +69,10 @@ public class Rekisteri {
         em.getTransaction().commit();
     }
 
+    /**
+     * Lisätään rekisteriin uusi harjoite
+     * @param uusi Lisättävä harjoite
+     */
     void lisaaHarjoite(Harjoite uusi) {
         EntityManager em = getEntityManager();
 
@@ -73,6 +82,40 @@ public class Rekisteri {
         em.merge(uusi);
 	// lopetetaan transaktio sanomalla commit
         em.getTransaction().commit();
+    }
+
+    /**
+     * Lisätään rekisteriin uusi laji
+     * @param uusi Lisättävä laji
+     */
+    void lisaaLaji(Laji uusi) {
+        EntityManager em = getEntityManager();
+
+	// aloitetaan transaktio
+        em.getTransaction().begin();
+	// tallennetaan laji
+        em.merge(uusi);
+	// lopetetaan transaktio sanomalla commit
+        em.getTransaction().commit();
+    }
+
+    Object getLajit() {
+        EntityManager em = getEntityManager();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Laji.class));
+        Query q = em.createQuery(cq);
+
+        return q.getResultList();
+    }
+
+    /**
+     * Etsii ja palauttaa lajin lajiId:n perusteella
+     * @param lajiId Etsittävän lajin ID-tunnus
+     * @return Etsitty laji
+     */
+    Laji haeLaji(long lajiId) {
+        EntityManager em = getEntityManager();
+        return em.find(Laji.class, lajiId);
     }
     
 }

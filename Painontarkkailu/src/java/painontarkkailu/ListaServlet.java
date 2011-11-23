@@ -29,6 +29,7 @@ public class ListaServlet extends HttpServlet {
         request.setAttribute("viesti", "wr0ld");
         
         request.setAttribute("lista", new Rekisteri().getKayttajat());
+        request.setAttribute("listaLaji", new Rekisteri().getLajit());
             
         RequestDispatcher dispatcher= request.getRequestDispatcher("lista.jsp");
         dispatcher.forward(request, response);

@@ -1,10 +1,12 @@
+package painontarkkailu;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package painontarkkailu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hannu Päiveröinen
  */
-public class LisaaHarjoiteServlet extends HttpServlet {
-
+public class LisaaLajiServlet extends HttpServlet {
+    
     private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -26,19 +28,11 @@ public class LisaaHarjoiteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        long kayttajaId = Long.parseLong(request.getParameter("kayttajaId"));
-        Kayttaja kayttaja = rekisteri.haeKayttaja(kayttajaId);
-        long lajiId = Long.parseLong(request.getParameter("lajiId"));
-        Laji laji = rekisteri.haeLaji(lajiId);
-        String paivays = request.getParameter("paivays");
-        double kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
-        String saa = request.getParameter("saa");
-        String kommentti = request.getParameter("kommentti");
-        int syke = Integer.parseInt(request.getParameter("syke"));
-   
+        String nimi = request.getParameter("nimi");
+        double kulutus = Double.parseDouble(request.getParameter("kulutus"));
         
-        Harjoite uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, saa, kommentti, syke);
-        rekisteri.lisaaHarjoite(uusi);
+        Laji uusi = new Laji(nimi, kulutus);
+        rekisteri.lisaaLaji(uusi);
         
         request.getRequestDispatcher("/Lista").forward(request, response);
     }

@@ -6,10 +6,7 @@ package painontarkkailu;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 /**
  *
  * @author Hannu Päiveröinen
@@ -20,9 +17,42 @@ public class Laji implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+    @Column
     private String nimi;
+    @Column
+    private double kulutus;
 
+    @OneToMany
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "laji_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "harjoite_id")})
+    private List<Harjoite> harjoitteet;
+
+    public Laji() {
+    }
+
+    public Laji(String nimi, double kulutus) {
+        this.nimi = nimi;
+        this.kulutus = kulutus;
+    }
+
+    public List<Harjoite> getHarjoitteet() {
+        return harjoitteet;
+    }
+
+    public void setHarjoitteet(List<Harjoite> harjoitteet) {
+        this.harjoitteet = harjoitteet;
+    }
+
+    public double getKulutus() {
+        return kulutus;
+    }
+
+    public void setKulutus(double kulutus) {
+        this.kulutus = kulutus;
+    }
+    
     public long getId() {
         return id;
     }
