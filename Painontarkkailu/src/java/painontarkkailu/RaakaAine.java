@@ -4,23 +4,37 @@
  */
 package painontarkkailu;
 
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.*;
 /**
  *
  * @author Hannu Päiveröinen
  */
-public class RaakaAine {
+
+@Entity
+public class RaakaAine  implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column
     private String nimi;
-    private String tyyppi;
+    @Column
     private double energia;
 
+    @OneToMany
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "raakaaine_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "ruokaliitos_id")})
+    private List<Ruokaliitos> ruokaliitokset;
+    
     public RaakaAine() {
     }
 
-    public RaakaAine(long id, String nimi, String tyyppi, double energia) {
+    public RaakaAine(long id, String nimi, double energia) {
         this.id = id;
         this.nimi = nimi;
-        this.tyyppi = tyyppi;
         this.energia = energia;
     }
 
@@ -47,13 +61,4 @@ public class RaakaAine {
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
-
-    public String getTyyppi() {
-        return tyyppi;
-    }
-
-    public void setTyyppi(String tyyppi) {
-        this.tyyppi = tyyppi;
-    }
-    
 }

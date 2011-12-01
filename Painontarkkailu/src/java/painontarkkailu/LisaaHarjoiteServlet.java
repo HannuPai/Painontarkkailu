@@ -26,18 +26,18 @@ public class LisaaHarjoiteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //TODO: Testit !
         long kayttajaId = Long.parseLong(request.getParameter("kayttajaId"));
         Kayttaja kayttaja = rekisteri.haeKayttaja(kayttajaId);
         long lajiId = Long.parseLong(request.getParameter("lajiId"));
         Laji laji = rekisteri.haeLaji(lajiId);
         String paivays = request.getParameter("paivays");
         double kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
-        String saa = request.getParameter("saa");
         String kommentti = request.getParameter("kommentti");
         int syke = Integer.parseInt(request.getParameter("syke"));
    
         
-        Harjoite uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, saa, kommentti, syke);
+        Harjoite uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, kommentti, syke);
         rekisteri.lisaaHarjoite(uusi);
         
         request.getRequestDispatcher("/Lista").forward(request, response);

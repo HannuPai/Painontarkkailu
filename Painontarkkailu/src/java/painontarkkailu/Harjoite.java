@@ -28,8 +28,6 @@ public class Harjoite implements Serializable {
     @Column
     private double kestoMinuuteissa;
     @Column
-    private String saa;
-    @Column
     private String kommentti;
     @Column
     private int syke;
@@ -45,12 +43,11 @@ public class Harjoite implements Serializable {
     public Harjoite() {
     }
 
-    Harjoite(Kayttaja kayttaja, Laji laji, String paivays, double kestoMinuuteissa, String saa, String kommentti, int syke) {
+    Harjoite(Kayttaja kayttaja, Laji laji, String paivays, double kestoMinuuteissa, String kommentti, int syke) {
         this.kayttaja = kayttaja;
         this.laji = laji;
         this.paivays = paivays;
         this.kestoMinuuteissa = kestoMinuuteissa;
-        this.saa = saa;
         this.kommentti = kommentti;
         this.syke = syke;
     }
@@ -96,14 +93,6 @@ public class Harjoite implements Serializable {
 
     public void setPaivays(String paivays) {
         this.paivays = paivays;
-    }
-
-    public String getSaa() {
-        return saa;
-    }
-
-    public void setSaa(String saa) {
-        this.saa = saa;
     }
 
     public int getSyke() {

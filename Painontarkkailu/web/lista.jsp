@@ -34,9 +34,8 @@
                         <option value="${laji.id}">${laji.nimi}</option>
                     </c:forEach>
                 </select><br/>
-                KestoMinuuteissa: <input type="text" name="kestoMinuuteissa"/> <br/>
-                Päiväys: <input type="text" name="paivays"/> <br/>
-                Sää: <input type="text" name="saa"/> <br/>
+                Kesto (minuuteissa): <input type="text" name="kestoMinuuteissa"/> <br/>
+                Päiväys (pp/kk/vvvv): <input type="text" name="paivays"/> <br/>
                 Syke: <input type="text" name="syke"/> <br/>
                 Kommentti: <input type="text" name="kommentti"/> <br/>
                 <input type="submit" value="Lähetä"/>

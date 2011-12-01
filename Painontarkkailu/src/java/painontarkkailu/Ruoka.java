@@ -4,15 +4,39 @@
  */
 package painontarkkailu;
 
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+
 /**
  *
  * @author Hannu Päiveröinen
  */
+@Entity
 public class Ruoka {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column
     private String nimi;
+    @Column
     private double maara;
 
+    @OneToMany
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "ruoka_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "ruokaliitos_id")})
+    private List<Ruokaliitos> ruokaliitokset;
+    
     public Ruoka() {
     }
 
