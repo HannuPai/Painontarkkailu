@@ -40,8 +40,7 @@ public class Ruoka {
     public Ruoka() {
     }
 
-    public Ruoka(long id, String nimi, double maara) {
-        this.id = id;
+    public Ruoka(String nimi, double maara) {
         this.nimi = nimi;
         this.maara = maara;
     }

@@ -117,5 +117,53 @@ public class Rekisteri {
         EntityManager em = getEntityManager();
         return em.find(Laji.class, lajiId);
     }
+
+    Object getRuoat() {
+        EntityManager em = getEntityManager();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Ruoka.class));
+        Query q = em.createQuery(cq);
+
+        return q.getResultList();
+    }
     
+    /**
+     * Etsii ja palauttaa ruoan ruokaId:n perusteella
+     * @param ruokaId Etsittävän ruoan ID-tunnus
+     * @return Etsitty ruoka
+     */
+    Ruoka haeRuoka(long ruokaId) {
+        EntityManager em = getEntityManager();
+        return em.find(Ruoka.class, ruokaId);
+    }
+
+    Object getRaakaaineet() {
+        EntityManager em = getEntityManager();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(RaakaAine.class));
+        Query q = em.createQuery(cq);
+
+        return q.getResultList();
+    }
+    
+    /**
+     * Etsii ja palauttaa raakaaineen raakaaineId:n perusteella
+     * @param raakaaineId Etsittävän raakaaineen ID-tunnus
+     * @return Etsitty raakaaine
+     */
+    RaakaAine haeRaakaaine(long raakaaineId) {
+        EntityManager em = getEntityManager();
+        return em.find(RaakaAine.class, raakaaineId);
+    }
+
+    void lisaaRaakaAine(RaakaAine uusi) {
+        EntityManager em = getEntityManager();
+
+	// aloitetaan transaktio
+        em.getTransaction().begin();
+	// tallennetaan raaka-aine
+        em.merge(uusi);
+	// lopetetaan transaktio sanomalla commit
+        em.getTransaction().commit();
+    }
 }

@@ -5,9 +5,7 @@
 package painontarkkailu;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +15,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hannu Päiveröinen
  */
-public class ListaServlet extends HttpServlet {
+public class LisaaRaakaaineServlet extends HttpServlet {
 
-    Calendar calendar = Calendar.getInstance();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
+    private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -31,15 +27,15 @@ public class ListaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("viesti", "wr0ld");
-        request.setAttribute("paivays", dateFormat.format(calendar.getTime()));
         
-        request.setAttribute("lista", new Rekisteri().getKayttajat());
-        request.setAttribute("listaLaji", new Rekisteri().getLajit());
-            
-        RequestDispatcher dispatcher= request.getRequestDispatcher("lista.jsp");
-        dispatcher.forward(request, response);
+        String nimi = request.getParameter("nimi");
+        double energia = Double.parseDouble(request.getParameter("energia"));
         
+        
+        RaakaAine uusi = new RaakaAine(nimi, energia);
+        rekisteri.lisaaRaakaAine(uusi);
+        
+        request.getRequestDispatcher("/Ruokailu").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -16,6 +16,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LisaaKayttajaServlet extends HttpServlet {
     
+    
+    public String getSukupuoli() {
+        
+          return "mies";
+    }
+   
+    
     private Rekisteri rekisteri = new Rekisteri();
 
     /** 
@@ -31,6 +38,8 @@ public class LisaaKayttajaServlet extends HttpServlet {
         String kayttajanimi = request.getParameter("kayttajanimi");
         String nimi = request.getParameter("nimi");
         int ika = Integer.parseInt(request.getParameter("ika"));
+        
+        //String sukupuoli = request.getAttribute("sex").toString();
         String sukupuoli = request.getParameter("sukupuoli");
         int pituus = Integer.parseInt(request.getParameter("pituus"));
         double paino = Double.parseDouble(request.getParameter("paino"));

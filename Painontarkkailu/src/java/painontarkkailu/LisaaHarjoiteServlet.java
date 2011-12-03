@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LisaaHarjoiteServlet extends HttpServlet {
 
+    private StringBuilder sb = new StringBuilder();
+    
     private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -26,7 +28,7 @@ public class LisaaHarjoiteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //TODO: Testit !
+        
         long kayttajaId = Long.parseLong(request.getParameter("kayttajaId"));
         Kayttaja kayttaja = rekisteri.haeKayttaja(kayttajaId);
         long lajiId = Long.parseLong(request.getParameter("lajiId"));

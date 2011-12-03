@@ -4,14 +4,35 @@
  */
 package painontarkkailu;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Hannu Päiveröinen
  */
-public class Ateria {
+@Entity
+public class Ateria implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column
     private String date;
-    //TODO: JoinColumns käyttäjä&ruoka
+    
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn
+    private Kayttaja kayttaja;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn
+    private Ruoka ruoka;
 
     public Ateria() {
     }

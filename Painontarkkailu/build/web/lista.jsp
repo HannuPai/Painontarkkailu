@@ -35,16 +35,13 @@
                     </c:forEach>
                 </select><br/>
                 Kesto (minuuteissa): <input type="text" name="kestoMinuuteissa"/> <br/>
-                Päiväys (pp/kk/vvvv): <input type="text" name="paivays"/> <br/>
+                Päiväys (pp/kk/vvvv): <input type="text" value=${paivays} name="paivays"/> <br/>
                 Syke: <input type="text" name="syke"/> <br/>
                 Kommentti: <input type="text" name="kommentti"/> <br/>
                 <input type="submit" value="Lähetä"/>
             </form>      
         </c:if>
         
-        <c:forEach var="kayttaja" items="${lista}" >
-            ${kayttaja.nimi} <br/>
-        </c:forEach>
             
             <h2>Uusi käyttäjä</h2>
             <form name="uusiKayttaja"
@@ -53,14 +50,14 @@
                 Käyttäjänimi: <input type="text" name="kayttajanimi" /> <br/>
                 Nimi: <input type="text" name="nimi" /> <br/>
                 Ikä: <input type="text" name="ika" /> <br/>
+                <input type="radio" name="sex" value="mies" /> Mies
+                <input type="radio" name="sex" value="nainen" /> Nainen<br />
                 Sukupuoli: <input type="text" name="sukupuoli" /> <br/>
                 Pituus: <input type="text" name="pituus" /> <br/>
                 Paino: <input type="text" name="paino" /> <br/>
                 <input type="submit" name="Lähetä"/>
             </form>
-        <c:forEach var="laji" items="${listaLaji}" >
-            ${laji.nimi} <br/>
-        </c:forEach>
+        
             
             <h2>Uusi laji</h2>
             <form name="uusiLaji"

@@ -32,8 +32,7 @@ public class RaakaAine  implements Serializable {
     public RaakaAine() {
     }
 
-    public RaakaAine(long id, String nimi, double energia) {
-        this.id = id;
+    public RaakaAine(String nimi, double energia) {
         this.nimi = nimi;
         this.energia = energia;
     }

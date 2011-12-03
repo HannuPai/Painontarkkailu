@@ -5,6 +5,7 @@
 package painontarkkailu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hannu Päiveröinen
  */
-public class ListaServlet extends HttpServlet {
+public class RuokailuServlet extends HttpServlet {
 
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -31,15 +32,14 @@ public class ListaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("viesti", "wr0ld");
         request.setAttribute("paivays", dateFormat.format(calendar.getTime()));
         
         request.setAttribute("lista", new Rekisteri().getKayttajat());
-        request.setAttribute("listaLaji", new Rekisteri().getLajit());
+        request.setAttribute("listaRuoka", new Rekisteri().getRuoat());
+        request.setAttribute("listaRaakaaine", new Rekisteri().getRaakaaineet());
             
-        RequestDispatcher dispatcher= request.getRequestDispatcher("lista.jsp");
+        RequestDispatcher dispatcher= request.getRequestDispatcher("ruokailu.jsp");
         dispatcher.forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -25,6 +25,14 @@
         <servlet-name>LisaaLajiServlet</servlet-name>
         <servlet-class>painontarkkailu.LisaaLajiServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RuokailuServlet</servlet-name>
+        <servlet-class>painontarkkailu.RuokailuServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LisaaRaakaaineServlet</servlet-name>
+        <servlet-class>painontarkkailu.LisaaRaakaaineServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -44,6 +52,14 @@
     <servlet-mapping>
         <servlet-name>LisaaLajiServlet</servlet-name>
         <url-pattern>/LisaaLaji</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RuokailuServlet</servlet-name>
+        <url-pattern>/Ruokailu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LisaaRaakaaineServlet</servlet-name>
+        <url-pattern>/LisaaRaakaaine</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
