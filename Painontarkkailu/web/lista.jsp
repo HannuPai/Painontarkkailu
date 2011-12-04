@@ -42,7 +42,6 @@
             </form>      
         </c:if>
         
-            
             <h2>Uusi käyttäjä</h2>
             <form name="uusiKayttaja"
                   action="${pageContext.request.contextPath}/LisaaKayttaja"
@@ -58,7 +57,6 @@
                 <input type="submit" name="Lähetä"/>
             </form>
         
-            
             <h2>Uusi laji</h2>
             <form name="uusiLaji"
                   action="${pageContext.request.contextPath}/LisaaLaji"

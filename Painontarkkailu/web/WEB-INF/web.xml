@@ -33,6 +33,14 @@
         <servlet-name>LisaaRaakaaineServlet</servlet-name>
         <servlet-class>painontarkkailu.LisaaRaakaaineServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LaskuritServlet</servlet-name>
+        <servlet-class>painontarkkailu.LaskuritServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LaskeKulutusServlet</servlet-name>
+        <servlet-class>painontarkkailu.LaskeKulutusServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -60,6 +68,14 @@
     <servlet-mapping>
         <servlet-name>LisaaRaakaaineServlet</servlet-name>
         <url-pattern>/LisaaRaakaaine</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LaskuritServlet</servlet-name>
+        <url-pattern>/Laskurit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LaskeKulutusServlet</servlet-name>
+        <url-pattern>/LaskeKulutus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

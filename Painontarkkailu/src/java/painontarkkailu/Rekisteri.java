@@ -118,6 +118,7 @@ public class Rekisteri {
         return em.find(Laji.class, lajiId);
     }
 
+
     Object getRuoat() {
         EntityManager em = getEntityManager();
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

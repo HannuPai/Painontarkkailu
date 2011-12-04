@@ -25,6 +25,8 @@ public class Ateria implements Serializable {
     private long id;
     @Column
     private String date;
+    @Column
+    private double maara;
     
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
@@ -37,9 +39,34 @@ public class Ateria implements Serializable {
     public Ateria() {
     }
 
-    public Ateria(long id, String date) {
+    public Ateria(long id, String date, double maara) {
         this.id = id;
         this.date = date;
+        this.maara = maara;
+    }
+
+    public Kayttaja getKayttaja() {
+        return kayttaja;
+    }
+
+    public void setKayttaja(Kayttaja kayttaja) {
+        this.kayttaja = kayttaja;
+    }
+
+    public double getMaara() {
+        return maara;
+    }
+
+    public void setMaara(double maara) {
+        this.maara = maara;
+    }
+
+    public Ruoka getRuoka() {
+        return ruoka;
+    }
+
+    public void setRuoka(Ruoka ruoka) {
+        this.ruoka = ruoka;
     }
 
     public String getDate() {

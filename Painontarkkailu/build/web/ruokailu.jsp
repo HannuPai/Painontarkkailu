@@ -34,33 +34,37 @@
                     </c:forEach>
                 </select><br/>
                 Päiväys (pp/kk/vvvv): <input type="text" value=${paivays} name="paivays"/> <br/>
+                Määrä : <input type="text" name="maara"/> <br/>
                 <input type="submit" value="Lähetä"/>
             </form>      
         </c:if>
-        
+
+        <h2>Uusi ruoka</h2>
        
-            <h2>Uusi ruoka</h2>
-            <form name="uusiRuoka"
-                  action="${pageContext.request.contextPath}/LisaaRuoka"
-                  method="post">
-                Nimi: <input type="text" name="nimi" /> <br/>
-                Määrä: <input type="text" name="maara" /> <br/>
-                Raaka-aine:
-                <select name="raakaaineId">
-                    <c:forEach var="raakaaine" items="${listaRaakaaine}">
-                        <option value="${raakaaine.id}">${raakaaine.nimi}</option>
-                    </c:forEach>
-                </select><br/>
-                <input type="submit" name="Lähetä"/>
-         </form>
-                  
-                  <h2>Uusi raaka-aine</h2>
-            <form name="uusiRaakaaine"
-                  action="${pageContext.request.contextPath}/LisaaRaakaaine"
-                  method="post">
-                Nimi: <input type="text" name="nimi" /> <br/>
-                Energia: <input type="text" name="energia" /> <br/>
-                <input type="submit" name="Lähetä"/>
-         </form>
+        <form name="uusiRuoka"
+              action="${pageContext.request.contextPath}/LisaaRuoka"
+              method="post">
+            Nimi: <input type="text" name="nimi" /> <br/>
+            Määrä: <input type="text" name="maara" /> 
+            Raaka-aine:
+            <select name="raakaaineId">
+                <c:forEach var="raakaaine" items="${listaRaakaaine}">
+                    <option value="${raakaaine.id}">${raakaaine.nimi}</option>
+                </c:forEach>
+            </select>
+            <input type="button" value="Lisää" onclick=""/><br/>
+                        
+            <input type="submit" name="Lähetä"/>
+        </form>
+        
+
+        <h2>Uusi raaka-aine</h2>
+        <form name="uusiRaakaaine"
+              action="${pageContext.request.contextPath}/LisaaRaakaaine"
+              method="post">
+            Nimi: <input type="text" name="nimi" /> <br/>
+            Energia: <input type="text" name="energia" /> <br/>
+            <input type="submit" name="Lähetä"/>
+        </form>
     </body>
 </html>

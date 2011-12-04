@@ -45,7 +45,7 @@ public class Laji implements Serializable {
         this.harjoitteet = harjoitteet;
     }
 
-    public double getKulutus() {
+    public  double getKulutus() {
         return kulutus;
     }
 
