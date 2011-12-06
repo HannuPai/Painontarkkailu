@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LaskeKulutusServlet extends HttpServlet {
 
-    private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,8 +34,9 @@ public class LaskeKulutusServlet extends HttpServlet {
         double paino = Double.parseDouble(request.getParameter("paino"));
         double kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
         
-        double kalorimaara = kulutus*ika*0.1*pituus*pituus*paino*0.01*kestoMinuuteissa*1.6;
-        
+        double painoindeksi = paino/((pituus*0.01)*(pituus*0.01));
+        double kalorimaara = kulutus*(ika*0.01)*(painoindeksi*0.03)*kestoMinuuteissa*0.004;
+        request.setAttribute("kulutus", kalorimaara+"");
         request.getRequestDispatcher("/Laskurit").forward(request, response);
     }
 

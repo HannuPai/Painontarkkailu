@@ -14,6 +14,7 @@
     </head>
     <body>
         <h1>Hello ${viesti}!</h1>
+        
         <a href="../Painontarkkailu">Painontarkkailu</a>
         <!-- testataan onko attribuutti "kayttajat" tyhjä //-->
         <c:if test="${not empty lista}">
@@ -36,10 +37,11 @@
                 </select><br/>
                 Kesto (minuuteissa): <input type="text" name="kestoMinuuteissa"/> <br/>
                 Päiväys (pp/kk/vvvv): <input type="text" value=${paivays} name="paivays"/> <br/>
-                Syke: <input type="text" name="syke"/> <br/>
+                Syke: <input type="text" value="0" name="syke"/> <br/>
                 Kommentti: <input type="text" name="kommentti"/> <br/>
                 <input type="submit" value="Lähetä"/>
-            </form>      
+            </form>     
+                <p>${varoitus}</p> 
         </c:if>
         
             <h2>Uusi käyttäjä</h2>

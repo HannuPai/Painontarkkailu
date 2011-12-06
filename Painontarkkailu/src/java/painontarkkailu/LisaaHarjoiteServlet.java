@@ -34,13 +34,36 @@ public class LisaaHarjoiteServlet extends HttpServlet {
         long lajiId = Long.parseLong(request.getParameter("lajiId"));
         Laji laji = rekisteri.haeLaji(lajiId);
         String paivays = request.getParameter("paivays");
-        double kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
-        String kommentti = request.getParameter("kommentti");
-        int syke = Integer.parseInt(request.getParameter("syke"));
-   
+        double kestoMinuuteissa = 0;
+        try{
+            kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
+        }
+        catch(NumberFormatException e){
+            sb.append("Tarkista, että kesto on ilmoitettu luvulla. ");
+        }
+        if(0>kestoMinuuteissa) sb.append("Kesto ei voi olla negatiivinen. ");
         
-        Harjoite uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, kommentti, syke);
-        rekisteri.lisaaHarjoite(uusi);
+        String kommentti = request.getParameter("kommentti");
+        if (kommentti.length()==0) kommentti = "-";
+        
+        int syke = 0;
+         try{
+            syke = Integer.parseInt(request.getParameter("syke"));
+        }
+        catch(NumberFormatException e){
+            sb.append("Tarkista, että syke on ilmoitettu luvulla. ");
+        }
+         if(0>syke) sb.append("Syke ei voi olla negatiivinen. ");
+        // TODO: parse päiväys kuntoon
+        Harjoite uusi ;
+        if(sb.length()==0){
+            uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, kommentti, syke);
+            rekisteri.lisaaHarjoite(uusi);
+        }
+        else{
+            request.setAttribute("varoitus", sb.toString());
+            sb.delete(0, sb.length());
+        }
         
         request.getRequestDispatcher("/Lista").forward(request, response);
     }

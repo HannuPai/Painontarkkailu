@@ -35,6 +35,7 @@
         </select><br/>
         Kesto (minuuteissa): <input type="text" name="kestoMinuuteissa"/> <br/>
         <input type="submit" name="Laske"/>
+        Kulutuksesi: <input type="text" value="${kulutus}"  name="kulutuksesi"/> <br/>
     </form>
 
     <a href="../Painontarkkailu">Painontarkkailu</a>
