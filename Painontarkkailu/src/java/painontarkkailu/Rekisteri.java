@@ -35,7 +35,6 @@ public class Rekisteri {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Kayttaja.class));
         Query q = em.createQuery(cq);
-
         return q.getResultList();
         }
     
@@ -44,7 +43,6 @@ public class Rekisteri {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Harjoite.class));
         Query q = em.createQuery(cq);
-
         return q.getResultList();
     }
     
@@ -104,7 +102,6 @@ public class Rekisteri {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Laji.class));
         Query q = em.createQuery(cq);
-
         return q.getResultList();
     }
 
@@ -124,7 +121,6 @@ public class Rekisteri {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Ruoka.class));
         Query q = em.createQuery(cq);
-
         return q.getResultList();
     }
     
@@ -143,7 +139,6 @@ public class Rekisteri {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(RaakaAine.class));
         Query q = em.createQuery(cq);
-
         return q.getResultList();
     }
     

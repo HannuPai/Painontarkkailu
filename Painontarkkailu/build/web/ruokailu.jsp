@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<link href="default.css" rel="stylesheet" type="text/css" title="Tyylipohja www-selaimelle" />
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -45,7 +46,7 @@
               action="${pageContext.request.contextPath}/LisaaRuoka"
               method="post">
             Nimi: <input type="text" name="nimi" /> <br/>
-            Määrä: <input type="text" name="maara" /> 
+            Määrä: <input type="text" name="maara" /> *100g -->
             Raaka-aine:
             <select name="raakaaineId">
                 <c:forEach var="raakaaine" items="${listaRaakaaine}">
@@ -63,7 +64,7 @@
               action="${pageContext.request.contextPath}/LisaaRaakaaine"
               method="post">
             Nimi: <input type="text" name="nimi" /> <br/>
-            Energia: <input type="text" name="energia" /> <br/>
+            Energia: <input type="text" name="energia" /> kcal/100g <br/>
             <input type="submit" name="Lähetä"/>
         </form>
     </body>

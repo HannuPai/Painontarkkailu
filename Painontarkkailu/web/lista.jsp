@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<link href="default.css" rel="stylesheet" type="text/css" title="Tyylipohja www-selaimelle" />
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,9 +36,9 @@
                         <option value="${laji.id}">${laji.nimi}</option>
                     </c:forEach>
                 </select><br/>
-                Kesto (minuuteissa): <input type="text" name="kestoMinuuteissa"/> <br/>
+                Kesto : <input type="text" name="kestoMinuuteissa"/> minuuttia. <br/>
                 Päiväys (pp/kk/vvvv): <input type="text" value=${paivays} name="paivays"/> <br/>
-                Syke: <input type="text" value="0" name="syke"/> <br/>
+                Keskimääräinen syke: <input type="text" value="0" name="syke"/> (0 jos ei tiedossa) <br/>
                 Kommentti: <input type="text" name="kommentti"/> <br/>
                 <input type="submit" value="Lähetä"/>
             </form>     
@@ -53,9 +54,8 @@
                 Ikä: <input type="text" name="ika" /> <br/>
                 <input type="radio" name="sex" value="mies" /> Mies
                 <input type="radio" name="sex" value="nainen" /> Nainen<br />
-                Sukupuoli: <input type="text" name="sukupuoli" /> <br/>
-                Pituus: <input type="text" name="pituus" /> <br/>
-                Paino: <input type="text" name="paino" /> <br/>
+                Pituus: <input type="text" name="pituus" /> cm <br/>
+                Paino: <input type="text" name="paino" /> kg <br/>
                 <input type="submit" name="Lähetä"/>
             </form>
         
@@ -64,7 +64,7 @@
                   action="${pageContext.request.contextPath}/LisaaLaji"
                   method="post">
                 Nimi: <input type="text" name="nimi" /> <br/>
-                Kulutus: <input type="text" name="kulutus" /> <br/>
+                Kulutus: <input type="text" name="kulutus" /> kcal/h<br/>
                 <input type="submit" name="Lähetä"/>
          </form>
     </body>

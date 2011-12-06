@@ -5,6 +5,7 @@
 package painontarkkailu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hannu Päiveröinen
  */
-public class LisaaHarjoiteServlet extends HttpServlet {
+public class LisaaRuokaServlet extends HttpServlet {
 
-    private StringBuilder sb = new StringBuilder();
-    
     private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -28,43 +27,9 @@ public class LisaaHarjoiteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        long kayttajaId = Long.parseLong(request.getParameter("kayttajaId"));
-        Kayttaja kayttaja = rekisteri.haeKayttaja(kayttajaId);
-        long lajiId = Long.parseLong(request.getParameter("lajiId"));
-        Laji laji = rekisteri.haeLaji(lajiId);
-        String paivays = request.getParameter("paivays");
-        double kestoMinuuteissa = 0;
-        try{
-            kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
-        }
-        catch(NumberFormatException e){
-            sb.append("Tarkista, että kesto on ilmoitettu luvulla. ");
-        }
-        if(0>kestoMinuuteissa) sb.append("Kesto ei voi olla negatiivinen. ");
-        
-        String kommentti = request.getParameter("kommentti");
-        if (kommentti.length()==0) kommentti = "-";
-        
-        int syke = 0;
-         try{
-            syke = Integer.parseInt(request.getParameter("syke"));
-        }
-        catch(NumberFormatException e){
-            sb.append("Tarkista, että syke on ilmoitettu luvulla. ");
-        }
-         if(0>syke) sb.append("Syke ei voi olla negatiivinen. ");
-        // TODO: parse päiväys kuntoon
-        Harjoite uusi ;
-        if(sb.length()==0){
-            uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, kommentti, syke);
-            rekisteri.lisaaHarjoite(uusi);
-        }
-        else{
-            request.setAttribute("varoitus", sb.toString());
-            sb.delete(0, sb.length());
-        }
-        
-        request.getRequestDispatcher("/Lista").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        Ruoka uusi;
+        uusi = new Ruoka();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

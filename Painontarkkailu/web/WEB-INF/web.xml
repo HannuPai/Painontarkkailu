@@ -41,6 +41,10 @@
         <servlet-name>LaskeKulutusServlet</servlet-name>
         <servlet-class>painontarkkailu.LaskeKulutusServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LisaaRuokaServlet</servlet-name>
+        <servlet-class>painontarkkailu.LisaaRuokaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -76,6 +80,10 @@
     <servlet-mapping>
         <servlet-name>LaskeKulutusServlet</servlet-name>
         <url-pattern>/LaskeKulutus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LisaaRuokaServlet</servlet-name>
+        <url-pattern>/LisaaRuoka</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

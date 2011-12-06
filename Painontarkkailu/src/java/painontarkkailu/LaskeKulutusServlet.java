@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Hannu Päiveröinen
  */
 public class LaskeKulutusServlet extends HttpServlet {
+     private StringBuilder sb = new StringBuilder();
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -27,15 +28,68 @@ public class LaskeKulutusServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long lajiId = Long.parseLong(request.getParameter("lajiId"));
-        double kulutus = 400;//rekisteri.getKulutus(lajiId); 
-        int ika = Integer.parseInt(request.getParameter("ika"));
-        String sukupuoli = request.getParameter("sukupuoli"); 
-        int pituus = Integer.parseInt(request.getParameter("ika"));
-        double paino = Double.parseDouble(request.getParameter("paino"));
-        double kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
+        int ika = 0;
+        try {
+            ika = Integer.parseInt(request.getParameter("ika"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että ikä on ilmoitettu luvulla. ");
+        }
+        if (0 > ika) {
+            sb.append("Ikä ei voi olla negatiivinen. ");
+        }
+
+        double kulutus = 0;
+        try {
+            kulutus = 400;//rekisteri.getKulutus(lajiId); 
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että kulutus on ilmoitettu luvulla. ");
+        }
+        if (0 > kulutus) {
+            sb.append("Kulutus ei voi olla negatiivinen. ");
+        }
+        double sukupuolikerroin=1;
+        String sukupuoli = "";
+        if (request.getParameter("sex").equals("mies")) {
+            sukupuoli = "mies";
+            sukupuolikerroin = 1.05;
+        } else if (request.getParameter("sex").equals("nainen")) {
+            sukupuoli = "nainen";
+            sukupuolikerroin = 0.95;
+        } else {
+            sb.append("Valitse sukupuoli");
+        }
+        int pituus = 0;
+        try {
+            pituus = Integer.parseInt(request.getParameter("pituus"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että pituus on ilmoitettu luvulla. ");
+        }
+        if (0 > pituus) {
+            sb.append("Pituus ei voi olla negatiivinen. ");
+        }
+        double paino = 0;
+        try {
+            paino = Double.parseDouble(request.getParameter("paino"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että paino on ilmoitettu luvulla. ");
+        }
+        if (0 > paino) {
+            sb.append("Paino ei voi olla negatiivinen. ");
+        }
+        double kestoMinuuteissa = 0;
+        try {
+            kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että kesto on ilmoitettu luvulla. ");
+        }
+        if (0 > kestoMinuuteissa) {
+            sb.append("Kesto ei voi olla negatiivinen. ");
+        }
         
         double painoindeksi = paino/((pituus*0.01)*(pituus*0.01));
-        double kalorimaara = kulutus*(ika*0.01)*(painoindeksi*0.03)*kestoMinuuteissa*0.004;
+        
+        
+        double kalorimaara = kulutus*(ika*0.01)*(painoindeksi*0.03)*kestoMinuuteissa*0.004*sukupuolikerroin;
         request.setAttribute("kulutus", kalorimaara+"");
         request.getRequestDispatcher("/Laskurit").forward(request, response);
     }

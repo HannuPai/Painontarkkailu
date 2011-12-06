@@ -15,14 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author Hannu Päiveröinen
  */
 public class LisaaKayttajaServlet extends HttpServlet {
-    
-    
-    public String getSukupuoli() {
-        
-          return "mies";
-    }
-   
-    
+
+    private StringBuilder sb = new StringBuilder();
     private Rekisteri rekisteri = new Rekisteri();
 
     /** 
@@ -34,19 +28,63 @@ public class LisaaKayttajaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String kayttajanimi = request.getParameter("kayttajanimi");
+        if (kayttajanimi.length() == 0) {
+            sb.append("Anna käyttäjätunnus");
+        }
         String nimi = request.getParameter("nimi");
-        int ika = Integer.parseInt(request.getParameter("ika"));
-        
-        //String sukupuoli = request.getAttribute("sex").toString();
-        String sukupuoli = request.getParameter("sukupuoli");
-        int pituus = Integer.parseInt(request.getParameter("pituus"));
-        double paino = Double.parseDouble(request.getParameter("paino"));
-        
-        Kayttaja uusi = new Kayttaja(nimi, kayttajanimi, ika, sukupuoli, pituus, paino);
-        rekisteri.lisaaKayttaja(uusi);
-        
+        if (nimi.length() == 0) {
+            nimi = "-";
+        }
+
+        int ika = 0;
+        try {
+            ika = Integer.parseInt(request.getParameter("ika"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että ikä on ilmoitettu luvulla. ");
+        }
+        if (0 > ika) {
+            sb.append("Ikä ei voi olla negatiivinen. ");
+        }
+
+        String sukupuoli = "";
+        if (request.getParameter("sex").equals("mies")) {
+            sukupuoli = "mies";
+        } else if (request.getParameter("sex").equals("nainen")) {
+            sukupuoli = "nainen";
+        } else {
+            sb.append("Valitse sukupuoli");
+        }
+        int pituus = 0;
+        try {
+            pituus = Integer.parseInt(request.getParameter("pituus"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että pituus on ilmoitettu luvulla. ");
+        }
+        if (0 > pituus) {
+            sb.append("Pituus ei voi olla negatiivinen. ");
+        }
+
+        double paino = 0;
+        try {
+            paino = Double.parseDouble(request.getParameter("paino"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että paino on ilmoitettu luvulla. ");
+        }
+        if (0 > paino) {
+            sb.append("Paino ei voi olla negatiivinen. ");
+        }
+        Kayttaja uusi;
+        if (sb.length() == 0) {
+            uusi = new Kayttaja(nimi, kayttajanimi, ika, sukupuoli, pituus, paino);
+            rekisteri.lisaaKayttaja(uusi);
+        } else {
+            request.setAttribute("varoitus", sb.toString());
+            sb.delete(0, sb.length());
+        }
+
+
         request.getRequestDispatcher("/Lista").forward(request, response);
     }
 
