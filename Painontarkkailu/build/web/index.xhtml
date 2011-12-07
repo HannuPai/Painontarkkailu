@@ -9,18 +9,28 @@
     <h:body>
         <h1>Tervetuloa Painontarkkailusovelluksen WWW-sivustolle!</h1>
         <p>Blaablaablaablaa</p>
-        <div id="menu">
-            <ul id="main">
-                <li class="current_page_item"><a href="#">Etusivu</a></li>
-                <li><a href="Lista">Lista</a></li>
-                <li><a href="Ruokailu">Ruokapuoli</a></li>
-                <li><a href="Laskurit">Laskurit</a></li>
-                <li><a href="#">Alisivu  4</a></li>
-                <li><a href="#">Alisivu  5</a></li>
-                <li><a href="#">Alisivu  6</a></li>
-            </ul>
+        
+        <form name="login" action="${pageContext.request.contextPath}/Kirjaudu" method="post">
+            Username: <input type="text" name="username"> </input> <br/>
+                Password: <input type="password" name="password"> </input><br/>
+                    <input type="submit" value="Kirjaudu"> </input>
+                    
+                    </form>
+        <a href="UusiKayttaja">Uusi Käyttäjä</a>
+                    
+        
+                        <div id="menu">
+                            <ul id="main">
+                                <li class="current_page_item"><a href="#">Etusivu</a></li>
+                                <li><a href="Lista">Lista</a></li>
+                                <li><a href="Ruokailu">Ruokapuoli</a></li>
+                                <li><a href="Laskurit">Laskurit</a></li>
+                                <li><a href="#">Alisivu  4</a></li>
+                                <li><a href="#">Alisivu  5</a></li>
+                                <li><a href="#">Alisivu  6</a></li>
+                            </ul>
 
-        </div>
-    </h:body>
-</html>
+                        </div>
+                        </h:body>
+                        </html>
 

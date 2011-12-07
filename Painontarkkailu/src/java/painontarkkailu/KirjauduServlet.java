@@ -1,9 +1,8 @@
-package painontarkkailu;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+package painontarkkailu;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hannu Päiveröinen
  */
-public class LisaaLajiServlet extends HttpServlet {
-    private StringBuilder sb = new StringBuilder();
-    private Rekisteri rekisteri = new Rekisteri();
+public class KirjauduServlet extends HttpServlet {
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -28,30 +26,8 @@ public class LisaaLajiServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nimi = request.getParameter("nimi");
-        request.setAttribute("nimiApu", nimi);
-        double kulutus  = 0;
-        try{
-            kulutus = Double.parseDouble(request.getParameter("kulutus"));
-            request.setAttribute("kulutusApu", kulutus);
-        }
-        catch(NumberFormatException e){
-            sb.append("Tarkista, että kulutus on ilmoitettu luvulla. ");
-        }
-        if(0>kulutus) sb.append("Kulutus ei voi olla negatiivinen. ");
-        
-        Laji uusi ;
-        if(sb.length()==0){
-            uusi = new Laji(nimi, kulutus);
-            rekisteri.lisaaLaji(uusi);
-            request.setAttribute("kulutusApu", "");
-            request.setAttribute("nimiApu", "");
-        }
-        else{
-            request.setAttribute("varoitus", sb.toString());
-            sb.delete(0, sb.length());
-        }
-        request.getRequestDispatcher("/Lista").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("/index").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

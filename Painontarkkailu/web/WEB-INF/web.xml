@@ -45,6 +45,14 @@
         <servlet-name>LisaaRuokaServlet</servlet-name>
         <servlet-class>painontarkkailu.LisaaRuokaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>KirjauduServlet</servlet-name>
+        <servlet-class>painontarkkailu.KirjauduServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UusiKayttajaServlet</servlet-name>
+        <servlet-class>painontarkkailu.UusiKayttajaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -84,6 +92,14 @@
     <servlet-mapping>
         <servlet-name>LisaaRuokaServlet</servlet-name>
         <url-pattern>/LisaaRuoka</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KirjauduServlet</servlet-name>
+        <url-pattern>/Kirjaudu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UusiKayttajaServlet</servlet-name>
+        <url-pattern>/UusiKayttaja</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

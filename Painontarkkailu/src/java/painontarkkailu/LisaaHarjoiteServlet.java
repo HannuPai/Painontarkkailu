@@ -5,6 +5,8 @@
 package painontarkkailu;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 public class LisaaHarjoiteServlet extends HttpServlet {
 
     private StringBuilder sb = new StringBuilder();
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
     private Rekisteri rekisteri = new Rekisteri();
     /** 
@@ -33,9 +37,11 @@ public class LisaaHarjoiteServlet extends HttpServlet {
         long lajiId = Long.parseLong(request.getParameter("lajiId"));
         Laji laji = rekisteri.haeLaji(lajiId);
         String paivays = request.getParameter("paivays");
+        request.setAttribute("paivays", paivays);
         double kestoMinuuteissa = 0;
         try{
             kestoMinuuteissa = Double.parseDouble(request.getParameter("kestoMinuuteissa"));
+            request.setAttribute("kestoApu", kestoMinuuteissa);
         }
         catch(NumberFormatException e){
             sb.append("Tarkista, että kesto on ilmoitettu luvulla. ");
@@ -43,11 +49,13 @@ public class LisaaHarjoiteServlet extends HttpServlet {
         if(0>kestoMinuuteissa) sb.append("Kesto ei voi olla negatiivinen. ");
         
         String kommentti = request.getParameter("kommentti");
+        request.setAttribute("kommenttiApu", kommentti);
         if (kommentti.length()==0) kommentti = "-";
         
         int syke = 0;
-         try{
+        try{
             syke = Integer.parseInt(request.getParameter("syke"));
+            request.setAttribute("sykeApu", syke);
         }
         catch(NumberFormatException e){
             sb.append("Tarkista, että syke on ilmoitettu luvulla. ");
@@ -58,10 +66,15 @@ public class LisaaHarjoiteServlet extends HttpServlet {
         if(sb.length()==0){
             uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, kommentti, syke);
             rekisteri.lisaaHarjoite(uusi);
+            request.setAttribute("kestoApu", "");
+            request.setAttribute("sykeApu", "");
+            request.setAttribute("kommenttiApu", "");
+            request.setAttribute("paivays", dateFormat.format(calendar.getTime()));
         }
         else{
             request.setAttribute("varoitus", sb.toString());
             sb.delete(0, sb.length());
+            
         }
         
         request.getRequestDispatcher("/Lista").forward(request, response);

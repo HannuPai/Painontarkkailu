@@ -14,7 +14,6 @@
         <title>Painontarkkailu</title>
     </head>
     <body>
-        <h1>Hello ${viesti}!</h1>
         
         <a href="../Painontarkkailu">Painontarkkailu</a>
         <!-- testataan onko attribuutti "kayttajat" tyhjä //-->
@@ -36,36 +35,25 @@
                         <option value="${laji.id}">${laji.nimi}</option>
                     </c:forEach>
                 </select><br/>
-                Kesto : <input type="text" name="kestoMinuuteissa"/> minuuttia. <br/>
-                Päiväys (pp/kk/vvvv): <input type="text" value=${paivays} name="paivays"/> <br/>
-                Keskimääräinen syke: <input type="text" value="0" name="syke"/> (0 jos ei tiedossa) <br/>
-                Kommentti: <input type="text" name="kommentti"/> <br/>
+                Kesto : <input type="text" value="${kestoApu}" name="kestoMinuuteissa"/> minuuttia. <br/>
+                Päiväys (pp/kk/vvvv): <input type="text" value="${paivays}" name="paivays"/> <br/>
+                Keskimääräinen syke: <input type="text" value="${sykeApu}" name="syke"/> (0 jos ei tiedossa) <br/>
+                Kommentti: <input type="text" value="${kommenttiApu}"  name="kommentti"/> <br/>
                 <input type="submit" value="Lähetä"/>
             </form>     
                 <p>${varoitus}</p> 
         </c:if>
         
-            <h2>Uusi käyttäjä</h2>
-            <form name="uusiKayttaja"
-                  action="${pageContext.request.contextPath}/LisaaKayttaja"
-                  method="post">
-                Käyttäjänimi: <input type="text" name="kayttajanimi" /> <br/>
-                Nimi: <input type="text" name="nimi" /> <br/>
-                Ikä: <input type="text" name="ika" /> <br/>
-                <input type="radio" name="sex" value="mies" /> Mies
-                <input type="radio" name="sex" value="nainen" /> Nainen<br />
-                Pituus: <input type="text" name="pituus" /> cm <br/>
-                Paino: <input type="text" name="paino" /> kg <br/>
-                <input type="submit" name="Lähetä"/>
-            </form>
+           
         
             <h2>Uusi laji</h2>
             <form name="uusiLaji"
                   action="${pageContext.request.contextPath}/LisaaLaji"
                   method="post">
-                Nimi: <input type="text" name="nimi" /> <br/>
-                Kulutus: <input type="text" name="kulutus" /> kcal/h<br/>
+                Nimi: <input type="text" value="${nimiApu}" name="nimi" /> <br/>
+                Kulutus: <input type="text" value="${kulutusApu}" name="kulutus" /> kcal/h<br/>
                 <input type="submit" name="Lähetä"/>
          </form>
+                <p>${varoitus}</p> 
     </body>
 </html>
