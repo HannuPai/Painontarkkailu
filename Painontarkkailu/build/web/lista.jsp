@@ -15,7 +15,7 @@
     </head>
     <body>
         
-        <a href="../Painontarkkailu">Painontarkkailu</a>
+        <a href="../Painontarkkailu">Etusivulle</a>
         <!-- testataan onko attribuutti "kayttajat" tyhjä //-->
         <c:if test="${not empty lista}">
             <h2>Uusi harjoite</h2>

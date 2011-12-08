@@ -89,7 +89,7 @@ public class LaskeKulutusServlet extends HttpServlet {
         double painoindeksi = paino/((pituus*0.01)*(pituus*0.01));
         
         
-        double kalorimaara = kulutus*(ika*0.01)*(painoindeksi*0.03)*kestoMinuuteissa*0.004*sukupuolikerroin;
+        double kalorimaara = kulutus*ika*(painoindeksi*0.03)*kestoMinuuteissa*0.004*sukupuolikerroin;
         request.setAttribute("kulutus", kalorimaara+"");
         request.getRequestDispatcher("/Laskurit").forward(request, response);
     }

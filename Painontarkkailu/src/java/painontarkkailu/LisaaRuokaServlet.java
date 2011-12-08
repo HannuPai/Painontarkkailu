@@ -27,9 +27,12 @@ public class LisaaRuokaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        
+        long raakaaineID;
         Ruoka uusi;
         uusi = new Ruoka();
+        
+        request.getRequestDispatcher("/Ruokailu").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

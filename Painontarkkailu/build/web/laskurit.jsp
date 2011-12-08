@@ -16,7 +16,7 @@
     <body>
         <h1>Kalori- sekä kulutuslaskurit</h1>
     </body>
-<a href="../Painontarkkailu">Painontarkkailu</a>
+<a href="../Painontarkkailu">Etusivulle</a>
     <h2>Laske kulutus</h2>
     <form name="kulutusLaskuri"
           action="${pageContext.request.contextPath}/LaskeKulutus"

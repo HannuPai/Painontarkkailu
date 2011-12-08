@@ -30,10 +30,12 @@ public class LisaaKayttajaServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String kayttajanimi = request.getParameter("kayttajanimi");
+        request.setAttribute("kayttajanimiApu", kayttajanimi);
         if (kayttajanimi.length() == 0) {
             sb.append("Anna käyttäjätunnus");
         }
         String nimi = request.getParameter("nimi");
+        request.setAttribute("nimiApu", nimi);
         if (nimi.length() == 0) {
             nimi = "-";
         }
@@ -41,6 +43,7 @@ public class LisaaKayttajaServlet extends HttpServlet {
         int ika = 0;
         try {
             ika = Integer.parseInt(request.getParameter("ika"));
+            request.setAttribute("ikaApu", ika);
         } catch (NumberFormatException e) {
             sb.append("Tarkista, että ikä on ilmoitettu luvulla. ");
         }
@@ -51,14 +54,17 @@ public class LisaaKayttajaServlet extends HttpServlet {
         String sukupuoli = "";
         if (request.getParameter("sex").equals("mies")) {
             sukupuoli = "mies";
+            request.setAttribute("miesApu", "checked");
         } else if (request.getParameter("sex").equals("nainen")) {
             sukupuoli = "nainen";
+            request.setAttribute("nainenApu", "checked");
         } else {
             sb.append("Valitse sukupuoli");
         }
         int pituus = 0;
         try {
             pituus = Integer.parseInt(request.getParameter("pituus"));
+            request.setAttribute("pituusApu", pituus);
         } catch (NumberFormatException e) {
             sb.append("Tarkista, että pituus on ilmoitettu luvulla. ");
         }
@@ -69,6 +75,7 @@ public class LisaaKayttajaServlet extends HttpServlet {
         double paino = 0;
         try {
             paino = Double.parseDouble(request.getParameter("paino"));
+            request.setAttribute("painoApu", paino);
         } catch (NumberFormatException e) {
             sb.append("Tarkista, että paino on ilmoitettu luvulla. ");
         }
@@ -79,6 +86,13 @@ public class LisaaKayttajaServlet extends HttpServlet {
         if (sb.length() == 0) {
             uusi = new Kayttaja(nimi, kayttajanimi, ika, sukupuoli, pituus, paino);
             rekisteri.lisaaKayttaja(uusi);
+            request.setAttribute("kayttajanimiApu", "");
+            request.setAttribute("nimiApu", "");
+            request.setAttribute("ikaApu", "");
+            request.setAttribute("miesApu", "");
+            request.setAttribute("naisApu", "");
+            request.setAttribute("pituusApu", "");
+            request.setAttribute("painoApu", "");
         } else {
             request.setAttribute("varoitus", sb.toString());
             sb.delete(0, sb.length());

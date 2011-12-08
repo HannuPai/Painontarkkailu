@@ -16,17 +16,19 @@
         <h1>Tervetuloa luomaan itsellesi profiili</h1>
     </body>
     
+    <a href="../Painontarkkailu">Etusivulle</a>
      <h2>Uusi käyttäjä</h2>
             <form name="uusiKayttaja"
                   action="${pageContext.request.contextPath}/LisaaKayttaja"
                   method="post">
-                Käyttäjänimi: <input type="text" name="kayttajanimi" /> <br/>
-                Nimi: <input type="text" name="nimi" /> <br/>
-                Ikä: <input type="text" name="ika" /> vuotta <br/>
-                <input type="radio" name="sex" value="mies" /> Mies
-                <input type="radio" name="sex" value="nainen" /> Nainen<br />
-                Pituus: <input type="text" name="pituus" /> cm <br/>
-                Paino: <input type="text" name="paino" /> kg <br/>
+                Käyttäjänimi: <input type="text" value="${kayttajanimiApu}" name="kayttajanimi" /> <br/>
+                Nimi: <input type="text" value="${nimiApu}" name="nimi" /> <br/>
+                Ikä: <input type="text" value="${ikaApu}" name="ika" /> vuotta <br/>
+                <input type="radio" name="sex"  value="mies" ${miesApu}/> Mies
+                <input type="radio" name="sex" value="nainen" ${nainenApu}/> Nainen<br />
+                Pituus: <input type="text" Value="${pituusApu}" name="pituus" /> cm <br/>
+                Paino: <input type="text" value="${painoApu}" name="paino" /> kg <br/>
                 <input type="submit" name="Lähetä"/>
             </form>
+                <p>${varoitus}</p>
 </html>
