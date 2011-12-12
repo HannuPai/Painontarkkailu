@@ -53,6 +53,10 @@
         <servlet-name>UusiKayttajaServlet</servlet-name>
         <servlet-class>painontarkkailu.UusiKayttajaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LaskeKaloritServlet</servlet-name>
+        <servlet-class>painontarkkailu.LaskeKaloritServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -100,6 +104,10 @@
     <servlet-mapping>
         <servlet-name>UusiKayttajaServlet</servlet-name>
         <url-pattern>/UusiKayttaja</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LaskeKaloritServlet</servlet-name>
+        <url-pattern>/LaskeKalorit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

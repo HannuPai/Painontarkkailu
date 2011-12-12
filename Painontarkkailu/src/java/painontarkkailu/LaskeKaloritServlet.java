@@ -2,18 +2,20 @@ package painontarkkailu;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet hoitaa laskurit-sivun lomakkeiden mukaiset laskennat sekä tekee oikeellisuus tarkistukset
+ * Servlet hoitaa laskurit-sivuston kalorit-lomakkeen toimivuudesta ja arvojen oikeellisuustarkistuksista
  * @author Hannu Päiveröinen
  */
-public class LaskuritServlet extends HttpServlet {
-
+public class LaskeKaloritServlet extends HttpServlet {
+    private StringBuilder sb = new StringBuilder();
+    private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -23,11 +25,21 @@ public class LaskuritServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("listaLaji", new Rekisteri().getLajit());
-        request.setAttribute("listaRuoka", new Rekisteri().getRuoat());
+        long ruokaId = Long.parseLong(request.getParameter("ruokaId"));
+        Object ruokaliitokset = rekisteri.getRuokaliitokset();
+        double maara = 0;
+        try {
+            maara = Double.parseDouble(request.getParameter("maara"));
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että määrä on ilmoitettu luvulla. ");
+        }
+        if (0 > maara) {
+            sb.append("Määrä ei voi olla negatiivinen. ");
+        }
         
-        RequestDispatcher dispatcher= request.getRequestDispatcher("laskurit.jsp");
-        dispatcher.forward(request, response);
+        double kalorimaara = maara*15;
+        request.setAttribute("kalorit", kalorimaara+"");
+        request.getRequestDispatcher("/Laskurit").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

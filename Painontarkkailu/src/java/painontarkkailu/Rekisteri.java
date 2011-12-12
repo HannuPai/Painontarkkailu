@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.util.List;
@@ -12,14 +8,14 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
- *
+ * Luokka hallinnoi tietokantaa
+ * 
  * @author Hannu Päiveröinen
  */
 public class Rekisteri {
     
     private EntityManagerFactory emf = null;
     
-  //  private static List<Kayttaja> kayttajat = new ArrayList();
     
     public Rekisteri(){
         // käytetään "PainontarkkailuPU"-konfiguraatiota
@@ -29,7 +25,11 @@ public class Rekisteri {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
+    /**
+     * Palauttaa tietokannasta käyttäjät
+     * @return käyttäjälista
+     */
     public List<Kayttaja> getKayttajat(){
         EntityManager em = getEntityManager();
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -38,6 +38,10 @@ public class Rekisteri {
         return q.getResultList();
         }
     
+    /**
+     * Palauttaa tietokannasta harjoitteet
+     * @return harjoitelistan
+     */
     public List<Kayttaja> getHarjoitteet(){
         EntityManager em = getEntityManager();
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -56,9 +60,12 @@ public class Rekisteri {
         return em.find(Kayttaja.class, kayttajaId);
     }
     
+    /**
+     * Lisää tietokantaan uuden käyttäjän
+     * @param kayttaja lisättävä käyttäjä
+     */
     public void lisaaKayttaja(Kayttaja kayttaja){
         EntityManager em = getEntityManager();
-
 	// aloitetaan transaktio
         em.getTransaction().begin();
 	// tallennetaan kayttaja
@@ -73,7 +80,6 @@ public class Rekisteri {
      */
     void lisaaHarjoite(Harjoite uusi) {
         EntityManager em = getEntityManager();
-
 	// aloitetaan transaktio
         em.getTransaction().begin();
 	// tallennetaan harjoite
@@ -88,7 +94,6 @@ public class Rekisteri {
      */
     void lisaaLaji(Laji uusi) {
         EntityManager em = getEntityManager();
-
 	// aloitetaan transaktio
         em.getTransaction().begin();
 	// tallennetaan laji
@@ -97,6 +102,10 @@ public class Rekisteri {
         em.getTransaction().commit();
     }
 
+    /**
+     * Palauttaa tietokannasta lajit
+     * @return lajit
+     */
     Object getLajit() {
         EntityManager em = getEntityManager();
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -115,7 +124,10 @@ public class Rekisteri {
         return em.find(Laji.class, lajiId);
     }
 
-
+     /**
+     * Palauttaa tietokannasta ruoat
+     * @return ruoat
+     */
     Object getRuoat() {
         EntityManager em = getEntityManager();
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -134,6 +146,23 @@ public class Rekisteri {
         return em.find(Ruoka.class, ruokaId);
     }
 
+    /**
+     * Palauttaa tietokannasta ruokaliitokset
+     * @return ruokaliitokset
+     */
+    
+    Object getRuokaliitokset() {
+        EntityManager em = getEntityManager();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Ruokaliitos.class));
+        Query q = em.createQuery(cq);
+        return q.getResultList();
+    }
+    
+    /**
+     * Palauttaa tietokannasta raaka-aineet
+     * @return raaka-aineet
+     */
     Object getRaakaaineet() {
         EntityManager em = getEntityManager();
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -152,9 +181,12 @@ public class Rekisteri {
         return em.find(RaakaAine.class, raakaaineId);
     }
 
+    /**
+     * Lisää tietokantaan uuden raaka-aineen
+     * @param uusi lisättävä raaka-aine
+     */
     void lisaaRaakaAine(RaakaAine uusi) {
         EntityManager em = getEntityManager();
-
 	// aloitetaan transaktio
         em.getTransaction().begin();
 	// tallennetaan raaka-aine
@@ -162,4 +194,33 @@ public class Rekisteri {
 	// lopetetaan transaktio sanomalla commit
         em.getTransaction().commit();
     }
+
+    /**
+     * Lisää tietokantaan ruokaliitoksen
+     * @param ruokaliitos lisättävä ruokaliitos
+     */
+    void lisaaRuokaliitos(Ruokaliitos ruokaliitos) {
+        EntityManager em = getEntityManager();
+	// aloitetaan transaktio
+        em.getTransaction().begin();
+	// tallennetaan ruokaliitos
+        em.merge(ruokaliitos);
+	// lopetetaan transaktio sanomalla commit
+        em.getTransaction().commit();
+    }
+
+    /**
+     * Lisää tietokantaan ruoan
+     * @param ruokaliitos lisättävä ruoka
+     */
+    void lisaaRuoka(Ruoka ruoka) {
+        EntityManager em = getEntityManager();
+	// aloitetaan transaktio
+        em.getTransaction().begin();
+	// tallennetaan ruoka
+        em.merge(ruoka);
+	// lopetetaan transaktio sanomalla commit
+        em.getTransaction().commit();
+    }
+
 }

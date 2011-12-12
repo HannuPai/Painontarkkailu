@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet laskee laskurit-sivun kulutuslomakkeen tiedoilla kulutuksen ja tarkistaa arvojen oikeellisuuden
  * @author Hannu Päiveröinen
  */
 public class LaskeKulutusServlet extends HttpServlet {

@@ -28,10 +28,14 @@ public class LisaaRuokaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        long raakaaineID;
-        Ruoka uusi;
-        uusi = new Ruoka();
-        
+        long raakaaineID = Long.parseLong(request.getParameter("raakaaineId"));
+        String ruoannimi = request.getParameter("nimi");
+        RaakaAine raakaaine = rekisteri.haeRaakaaine(raakaaineID);
+        Ruoka ruoka = new Ruoka(ruoannimi);
+        rekisteri.lisaaRuoka(ruoka);
+        long ruokaID = ruoka.getId();
+        Ruokaliitos ruokaliitos = new Ruokaliitos(raakaaine,ruoka);
+        rekisteri.lisaaRuokaliitos(ruokaliitos);
         request.getRequestDispatcher("/Ruokailu").forward(request, response);
     }
 

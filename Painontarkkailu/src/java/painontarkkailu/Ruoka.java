@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.Serializable;
@@ -16,7 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 /**
- *
+ * Ruoka-luokka hallinnoi ruoan konstruktoreita ja getterit sekä setterit
  * @author Hannu Päiveröinen
  */
 @Entity
@@ -40,9 +36,8 @@ public class Ruoka {
     public Ruoka() {
     }
 
-    public Ruoka(String nimi, double maara) {
+    public Ruoka(String nimi) {
         this.nimi = nimi;
-        this.maara = maara;
     }
 
     public long getId() {
@@ -67,6 +62,5 @@ public class Ruoka {
 
     public void setNimi(String nimi) {
         this.nimi = nimi;
-    }
-    
+    }   
 }

@@ -36,10 +36,10 @@
         <input type="submit" name="Laske"/>
         Kulutuksesi: <input type="text" value="${kulutus}"  name="kulutuksesi"/> kcal <br/>
     </form>
-
+<br/>
         <h2>Laske kalorimäärä</h2>
         <form name="kaloriLaskuri"
-              action="${pageContext.request.contextPath}/LaskeKalori"
+              action="${pageContext.request.contextPath}/LaskeKalorit"
               method="post">
             Ruoka:
             <select name="ruokaId">
@@ -49,6 +49,7 @@
             </select><br/>
             Määrä : <input type="text" name="maara"/> annosta <br/>
             <input type="submit" value="Lähetä"/>
+        Ateriasi kalorimäärä: <input type="text" value="${kalorit}"  name="kalorimaara"/> kcal <br/>
         </form>
 
 </html>

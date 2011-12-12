@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
@@ -13,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servletillä lisätään tietokantaan harjoite annetun lomakkeen mukaan
+ * Lisäksi tarkistetaan että käyttäjän antamat tiedot ovat oikeellisia
  * @author Hannu Päiveröinen
  */
 public class LisaaHarjoiteServlet extends HttpServlet {
-
     private StringBuilder sb = new StringBuilder();
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
     private Rekisteri rekisteri = new Rekisteri();
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -73,10 +69,8 @@ public class LisaaHarjoiteServlet extends HttpServlet {
         }
         else{
             request.setAttribute("varoitus", sb.toString());
-            sb.delete(0, sb.length());
-            
-        }
-        
+            sb.delete(0, sb.length());   
+        }    
         request.getRequestDispatcher("/Lista").forward(request, response);
     }
 
