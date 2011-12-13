@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
@@ -15,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet vastaa ruokailu-sivun lomakkeiden listauksista
  * @author Hannu Päiveröinen
  */
 public class RuokailuServlet extends HttpServlet {

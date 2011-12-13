@@ -1,18 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet vastaa ruokailu-sivulla lisätyn ruoan lisäämisestä tietokantaan
  * @author Hannu Päiveröinen
  */
 public class LisaaRuokaServlet extends HttpServlet {
@@ -32,9 +27,11 @@ public class LisaaRuokaServlet extends HttpServlet {
         String ruoannimi = request.getParameter("nimi");
         RaakaAine raakaaine = rekisteri.haeRaakaaine(raakaaineID);
         Ruoka ruoka = new Ruoka(ruoannimi);
+        request.getParameterMap();
+        double maara= Double.parseDouble(request.getParameter("maara"));
         rekisteri.lisaaRuoka(ruoka);
         long ruokaID = ruoka.getId();
-        Ruokaliitos ruokaliitos = new Ruokaliitos(raakaaine,ruoka);
+        Ruokaliitos ruokaliitos = new Ruokaliitos(raakaaine,maara, ruoka);
         rekisteri.lisaaRuokaliitos(ruokaliitos);
         request.getRequestDispatcher("/Ruokailu").forward(request, response);
     }

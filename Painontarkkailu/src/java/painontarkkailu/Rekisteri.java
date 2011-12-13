@@ -123,7 +123,59 @@ public class Rekisteri {
         EntityManager em = getEntityManager();
         return em.find(Laji.class, lajiId);
     }
-
+    
+    /**
+     * Hakee kulutuksen lajista id:n perusteella
+     * @param lajiId haettavan lajin id
+     * @return halutun lajin kulutus
+     */
+    double getKulutus(long lajiId) {
+        EntityManager em = getEntityManager();
+        Laji laji = em.find(Laji.class, lajiId);
+        return laji.getKulutus();
+    }
+    
+    /**
+     * Etsii ja palauttaa käyttäjän iän kayttajaId:n perusteella
+     * @param lajiId Etsittävän käyttäjän ID-tunnus
+     * @return Käyttäjän ikä
+     */
+    String getKayttajanIka(long kayttajaId) {
+        EntityManager em = getEntityManager();
+        Kayttaja kayttaja = em.find(Kayttaja.class, kayttajaId);
+        return kayttaja.getIka()+"";
+    }
+    /**
+     * Etsii ja palauttaa käyttäjän pituuden kayttajaId:n perusteella
+     * @param lajiId Etsittävän käyttäjän ID-tunnus
+     * @return Käyttäjän pituus
+     */
+    String getKayttajanPituus(long kayttajaId) {
+        EntityManager em = getEntityManager();
+        Kayttaja kayttaja = em.find(Kayttaja.class, kayttajaId);
+        return kayttaja.getPituus()+"";
+    }
+    /**
+     * Etsii ja palauttaa käyttäjän painon kayttajaId:n perusteella
+     * @param lajiId Etsittävän käyttäjän ID-tunnus
+     * @return Käyttäjän paino
+     */
+    String getKayttajanPaino(long kayttajaId) {
+        EntityManager em = getEntityManager();
+        Kayttaja kayttaja = em.find(Kayttaja.class, kayttajaId);
+        return kayttaja.getPaino()+"";
+    }
+    /**
+     * Etsii ja palauttaa käyttäjän sukupuolen kayttajaId:n perusteella
+     * @param lajiId Etsittävän käyttäjän ID-tunnus
+     * @return Käyttäjän sukupuoli
+     */
+    String getKayttajanSP(long kayttajaId) {
+        EntityManager em = getEntityManager();
+        Kayttaja kayttaja = em.find(Kayttaja.class, kayttajaId);
+        return kayttaja.getSukupuoli()+"";
+    }
+    
      /**
      * Palauttaa tietokannasta ruoat
      * @return ruoat
@@ -222,5 +274,20 @@ public class Rekisteri {
 	// lopetetaan transaktio sanomalla commit
         em.getTransaction().commit();
     }
+    
+    /**
+     * Lisää tietokantaan aterian
+     * @param ateria lisättävä ateria
+     */
+    void lisaaAteria(Ateria ateria) {
+        EntityManager em = getEntityManager();
+	// aloitetaan transaktio
+        em.getTransaction().begin();
+	// tallennetaan ateria
+        em.merge(ateria);
+	// lopetetaan transaktio sanomalla commit
+        em.getTransaction().commit();
+    }
 
+    
 }

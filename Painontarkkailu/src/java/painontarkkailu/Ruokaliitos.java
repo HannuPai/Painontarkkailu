@@ -27,6 +27,7 @@ public class Ruokaliitos  implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     private RaakaAine raakaaine;
+    private double maara;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
@@ -35,7 +36,9 @@ public class Ruokaliitos  implements Serializable {
     public Ruokaliitos() {
     }
 
-    public Ruokaliitos(RaakaAine raakaaine, Ruoka ruoka) {
+
+    public Ruokaliitos(RaakaAine raakaaine, double maara, Ruoka ruoka) {
+        this.maara = maara;
         this.raakaaine = raakaaine;
         this.ruoka = ruoka;
     }

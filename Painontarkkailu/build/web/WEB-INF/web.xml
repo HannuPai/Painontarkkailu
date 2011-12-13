@@ -57,6 +57,14 @@
         <servlet-name>LaskeKaloritServlet</servlet-name>
         <servlet-class>painontarkkailu.LaskeKaloritServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaivitaKayttajaServlet</servlet-name>
+        <servlet-class>painontarkkailu.PaivitaKayttajaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LisaaAteriaServlet</servlet-name>
+        <servlet-class>painontarkkailu.LisaaAteriaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -108,6 +116,14 @@
     <servlet-mapping>
         <servlet-name>LaskeKaloritServlet</servlet-name>
         <url-pattern>/LaskeKalorit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaivitaKayttajaServlet</servlet-name>
+        <url-pattern>/PaivitaKayttaja</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LisaaAteriaServlet</servlet-name>
+        <url-pattern>/LisaaAteria</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

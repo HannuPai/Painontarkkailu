@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Hannu Päiveröinen
  */
 public class LaskuritServlet extends HttpServlet {
-
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -25,7 +25,7 @@ public class LaskuritServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("listaLaji", new Rekisteri().getLajit());
         request.setAttribute("listaRuoka", new Rekisteri().getRuoat());
-        
+        request.setAttribute("listaKayttaja", new Rekisteri().getKayttajat());
         RequestDispatcher dispatcher= request.getRequestDispatcher("laskurit.jsp");
         dispatcher.forward(request, response);
     }

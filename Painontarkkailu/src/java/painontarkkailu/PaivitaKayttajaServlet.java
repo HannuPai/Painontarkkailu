@@ -1,27 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet on vastuussa päivittäjän tietojen hausta ja lomakkeen esitäytöstä
  * @author Hannu Päiveröinen
  */
-public class ListaServlet extends HttpServlet {
+public class PaivitaKayttajaServlet extends HttpServlet {
 
-    Calendar calendar = Calendar.getInstance();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
+    private Rekisteri rekisteri = new Rekisteri();
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -31,14 +23,20 @@ public class ListaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("paivays", dateFormat.format(calendar.getTime()));
-        
-        request.setAttribute("lista", new Rekisteri().getKayttajat());
-        request.setAttribute("listaLaji", new Rekisteri().getLajit());
-            
-        RequestDispatcher dispatcher= request.getRequestDispatcher("lista.jsp");
-        dispatcher.forward(request, response);
-        
+        response.setContentType("text/html;charset=UTF-8");
+        long kayttajaId = Long.parseLong(request.getParameter("kayttajaId"));
+        request.setAttribute("apuIka", rekisteri.getKayttajanIka(kayttajaId));
+        request.setAttribute("apuPituus", rekisteri.getKayttajanPituus(kayttajaId));
+        request.setAttribute("apuPaino", rekisteri.getKayttajanPaino(kayttajaId));
+        String apu = rekisteri.getKayttajanSP(kayttajaId);
+        if (apu.equals("mies")) {
+            request.setAttribute("miesApu", "checked");
+            request.setAttribute("nainenApu", "");
+        } else {
+            request.setAttribute("miesApu", "");
+            request.setAttribute("nainenApu", "checked");
+        }
+        request.getRequestDispatcher("/Laskurit").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

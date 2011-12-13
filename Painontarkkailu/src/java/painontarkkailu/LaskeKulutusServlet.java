@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LaskeKulutusServlet extends HttpServlet {
      private StringBuilder sb = new StringBuilder();
-
+     private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -28,6 +28,7 @@ public class LaskeKulutusServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long lajiId = Long.parseLong(request.getParameter("lajiId"));
+        
         int ika = 0;
         try {
             ika = Integer.parseInt(request.getParameter("ika"));
@@ -37,10 +38,9 @@ public class LaskeKulutusServlet extends HttpServlet {
         if (0 > ika) {
             sb.append("Ikä ei voi olla negatiivinen. ");
         }
-
         double kulutus = 0;
         try {
-            kulutus = 400;//rekisteri.getKulutus(lajiId); 
+            kulutus = rekisteri.getKulutus(lajiId); 
         } catch (NumberFormatException e) {
             sb.append("Tarkista, että kulutus on ilmoitettu luvulla. ");
         }
@@ -85,10 +85,7 @@ public class LaskeKulutusServlet extends HttpServlet {
         if (0 > kestoMinuuteissa) {
             sb.append("Kesto ei voi olla negatiivinen. ");
         }
-        
         double painoindeksi = paino/((pituus*0.01)*(pituus*0.01));
-        
-        
         double kalorimaara = kulutus*ika*(painoindeksi*0.03)*kestoMinuuteissa*0.004*sukupuolikerroin;
         request.setAttribute("kulutus", kalorimaara+"");
         request.getRequestDispatcher("/Laskurit").forward(request, response);
