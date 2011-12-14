@@ -19,13 +19,26 @@
 <a href="../Painontarkkailu">Etusivulle</a>
     <h2>Laske kulutus</h2>
     <form name="kulutusLaskuri"
+           action="${pageContext.request.contextPath}/PaivitaKayttaja"
+           method="post">
+         Käyttäjä:
+         <select  name="kayttajaId">
+             <c:forEach var="kayttaja" items="${listaKayttaja}">
+                 <option value="${kayttaja.id}">${kayttaja.nimi}</option>
+             </c:forEach>
+         </select><br/>
+         <input type="submit" value="Päivitä"/>
+     </form>
+          <br/>
+    <form name="kulutusLaskuri"
           action="${pageContext.request.contextPath}/LaskeKulutus"
           method="post">
-        Ikä: <input type="text" name="ika" /> <br/>
-        <input type="radio" name="sex" value="mies" /> Mies
-        <input type="radio" name="sex" value="nainen" /> Nainen<br />
-        Pituus: <input type="text" name="pituus" /> cm <br/>
-        Paino: <input type="text" name="paino" /> kg <br/>
+        
+        Ikä: <input type="text" value="${apuIka}" name="ika" /> <br/>
+        <input type="radio" name="sex" value="mies" ${miesApu}/> Mies
+        <input type="radio" name="sex" value="nainen" ${nainenApu}/> Nainen<br />
+        Pituus: <input type="text" value="${apuPituus}" name="pituus" /> cm <br/>
+        Paino: <input type="text" value="${apuPaino}" name="paino" /> kg <br/>
         Laji:
         <select name="lajiId">
             <c:forEach var="laji" items="${listaLaji}">
@@ -36,7 +49,7 @@
         <input type="submit" name="Laske"/>
         Kulutuksesi: <input type="text" value="${kulutus}"  name="kulutuksesi"/> kcal <br/>
     </form>
-
+<p>${varoitus}</p>
         <h2>Laske kalorimäärä</h2>
         <form name="kaloriLaskuri"
               action="${pageContext.request.contextPath}/LaskeKalori"

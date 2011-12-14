@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +44,7 @@ public class LaskeKulutusServlet extends HttpServlet {
         }
         double sukupuolikerroin=1;
         String sukupuoli = "";
+        
         if (request.getParameter("sex").equals("mies")) {
             sukupuoli = "mies";
             sukupuolikerroin = 1.05;
@@ -58,6 +54,7 @@ public class LaskeKulutusServlet extends HttpServlet {
         } else {
             sb.append("Valitse sukupuoli");
         }
+        
         int pituus = 0;
         try {
             pituus = Integer.parseInt(request.getParameter("pituus"));
@@ -85,9 +82,15 @@ public class LaskeKulutusServlet extends HttpServlet {
         if (0 > kestoMinuuteissa) {
             sb.append("Kesto ei voi olla negatiivinen. ");
         }
-        double painoindeksi = paino/((pituus*0.01)*(pituus*0.01));
-        double kalorimaara = kulutus*ika*(painoindeksi*0.03)*kestoMinuuteissa*0.004*sukupuolikerroin;
-        request.setAttribute("kulutus", kalorimaara+"");
+        try{
+            double painoindeksi = paino/((pituus*0.01)*(pituus*0.01));
+           double kalorimaara = kulutus*ika*(painoindeksi*0.03)*kestoMinuuteissa*0.004*sukupuolikerroin;
+            request.setAttribute("kulutus", kalorimaara+"");
+            
+            sb.delete(0, sb.length()); 
+        } catch(NumberFormatException e) {
+            sb.append("Tarkista arvot");
+        }
         request.getRequestDispatcher("/Laskurit").forward(request, response);
     }
 

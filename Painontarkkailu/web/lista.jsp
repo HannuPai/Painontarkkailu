@@ -41,7 +41,7 @@
                 Kommentti: <input type="text" value="${kommenttiApu}"  name="kommentti"/> <br/>
                 <input type="submit" value="Lähetä"/>
             </form>     
-                <p>${varoitus}</p> 
+                 
         </c:if>
         
            
