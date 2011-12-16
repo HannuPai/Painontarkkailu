@@ -1,22 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet lisää raaka-aineen tietokantaan ja tarkastaa lomakkeen oikeellisuuden.
  * @author Hannu Päiveröinen
  */
 public class LisaaRaakaaineServlet extends HttpServlet {
-
+    private StringBuilder sb = new StringBuilder();
     private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -27,14 +22,34 @@ public class LisaaRaakaaineServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String nimi = request.getParameter("nimi");
-        double energia = Double.parseDouble(request.getParameter("energia"));
+        request.setAttribute("nimiApu", nimi);
+        if (nimi.length() == 0) {
+            sb.append("Anna raaka-aineen nimi. ");
+        }
         
+        double energia= 0;
+        try {
+            energia = Double.parseDouble(request.getParameter("energia"));
+            request.setAttribute("energiaApu", energia);
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että energia on ilmoitettu luvulla. ");
+        }
+        if (0 > energia) {
+            sb.append("Energia ei voi olla negatiivinen. ");
+        }
         
-        RaakaAine uusi = new RaakaAine(nimi, energia);
-        rekisteri.lisaaRaakaAine(uusi);
-        
+        RaakaAine uusi;
+        if (sb.length() == 0) {
+            uusi = new RaakaAine(nimi, energia);
+            rekisteri.lisaaRaakaAine(uusi);
+            request.setAttribute("nimiApu", "");
+            request.setAttribute("energiaApu", "");
+            request.setAttribute("varoitus2", "Raaka-aine lisätty.");
+        } else {
+            request.setAttribute("varoitus2", sb.toString());
+            sb.delete(0, sb.length());
+        }
         request.getRequestDispatcher("/Ruokailu").forward(request, response);
     }
 

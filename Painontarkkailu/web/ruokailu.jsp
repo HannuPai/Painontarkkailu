@@ -91,5 +91,6 @@
             Energia: <input type="text" name="energia" /> kcal/100g <br/>
             <input type="submit" name="Lähetä"/>
         </form>
+              <p>${varoitus2}</p>
     </body>
 </html>
