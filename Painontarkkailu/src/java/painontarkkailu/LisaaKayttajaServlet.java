@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
@@ -11,7 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servletillä lisätään tietokantaan käyttäjä annetun lomakkeen mukaan
+ * Lisäksi tarkistetaan että käyttäjän antamat tiedot ovat oikeellisia
  * @author Hannu Päiveröinen
  */
 public class LisaaKayttajaServlet extends HttpServlet {
@@ -93,6 +90,7 @@ public class LisaaKayttajaServlet extends HttpServlet {
             request.setAttribute("naisApu", "");
             request.setAttribute("pituusApu", "");
             request.setAttribute("painoApu", "");
+            request.setAttribute("varoitus", "Harjoite lisätty.");
         } else {
             request.setAttribute("varoitus", sb.toString());
             sb.delete(0, sb.length());

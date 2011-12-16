@@ -2,6 +2,8 @@ package painontarkkailu;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Hannu Päiveröinen
  */
 public class LisaaAteriaServlet extends HttpServlet {
+    private StringBuilder sb = new StringBuilder();
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -22,8 +27,34 @@ public class LisaaAteriaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Ateria ateria = new Ateria();
-        rekisteri.lisaaAteria(ateria);
+        long kayttajaId = Long.parseLong(request.getParameter("kayttajaId"));
+        Kayttaja kayttaja = rekisteri.haeKayttaja(kayttajaId);
+        long ruokaId = Long.parseLong(request.getParameter("ruokaId"));
+        Ruoka ruoka = rekisteri.haeRuoka(ruokaId);
+        String paivays = request.getParameter("paivays");
+        request.setAttribute("paivays", paivays);
+        double maara = 0;
+        try{
+            maara = Double.parseDouble(request.getParameter("maara"));
+            request.setAttribute("maara", maara);
+        }
+        catch(NumberFormatException e){
+            sb.append("Tarkista, että määrä on ilmoitettu luvulla. ");
+        }
+        if(0>maara) sb.append("Määrä ei voi olla negatiivinen. ");
+        
+        Ateria ateria;
+        if(sb.length()==0){
+            ateria = new Ateria(kayttaja, ruoka, paivays, maara);
+            rekisteri.lisaaAteria(ateria);
+            request.setAttribute("maara", "");
+            request.setAttribute("paivays", dateFormat.format(calendar.getTime()));
+            request.setAttribute("varoitus", "Ateria lisätty.");
+        }
+        else{
+            request.setAttribute("varoitus", sb.toString());
+            sb.delete(0, sb.length());   
+        } 
         request.getRequestDispatcher("/Ruokailu").forward(request, response);
     }
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.Serializable;
@@ -15,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
- *
+ * Luokka sisältää Ateria taulun konstruktiot sekä getterit ja setterit
  * @author Hannu Päiveröinen
  */
 @Entity
@@ -39,8 +35,9 @@ public class Ateria implements Serializable {
     public Ateria() {
     }
 
-    public Ateria(long id, String date, double maara) {
-        this.id = id;
+    public Ateria(Kayttaja kayttaja, Ruoka ruoka, String date, double maara) {
+        this.kayttaja = kayttaja;
+        this.ruoka = ruoka;
         this.date = date;
         this.maara = maara;
     }

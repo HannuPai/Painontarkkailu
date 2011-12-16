@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Hannu Päiveröinen
  */
 public class LisaaRuokaServlet extends HttpServlet {
-
+    private StringBuilder sb = new StringBuilder();
     private Rekisteri rekisteri = new Rekisteri();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -25,14 +25,38 @@ public class LisaaRuokaServlet extends HttpServlet {
         
         long raakaaineID = Long.parseLong(request.getParameter("raakaaineId"));
         String ruoannimi = request.getParameter("nimi");
+        request.setAttribute("ruoannimiApu", ruoannimi);
+        if (ruoannimi.length() == 0) {
+            sb.append("Anna ruoan nimi. ");
+        }
         RaakaAine raakaaine = rekisteri.haeRaakaaine(raakaaineID);
         Ruoka ruoka = new Ruoka(ruoannimi);
         request.getParameterMap();
-        double maara= Double.parseDouble(request.getParameter("maara"));
-        rekisteri.lisaaRuoka(ruoka);
-        long ruokaID = ruoka.getId();
-        Ruokaliitos ruokaliitos = new Ruokaliitos(raakaaine,maara, ruoka);
-        rekisteri.lisaaRuokaliitos(ruokaliitos);
+        double maara= 0;
+        try {
+            maara = Double.parseDouble(request.getParameter("maara"));
+            request.setAttribute("maaraApu", maara);
+        } catch (NumberFormatException e) {
+            sb.append("Tarkista, että määrä on ilmoitettu luvulla. ");
+        }
+        if (0 > maara) {
+            sb.append("Määrä ei voi olla negatiivinen. ");
+        }
+        
+        Ruokaliitos ruokaliitos;
+        if (sb.length() == 0) {
+            rekisteri.lisaaRuoka(ruoka);
+            long ruokaID = ruoka.getId();
+            ruokaliitos = new Ruokaliitos(raakaaine, maara, ruoka);
+            rekisteri.lisaaRuokaliitos(ruokaliitos);
+            
+            request.setAttribute("ruoannimiApu", "");
+            request.setAttribute("maaraApu", "");
+            request.setAttribute("varoitus", "Ruoka lisätty.");
+        } else {
+            request.setAttribute("varoitus", sb.toString());
+            sb.delete(0, sb.length());
+        }
         request.getRequestDispatcher("/Ruokailu").forward(request, response);
     }
 

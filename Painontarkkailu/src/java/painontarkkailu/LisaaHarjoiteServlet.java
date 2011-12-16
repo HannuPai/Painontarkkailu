@@ -57,7 +57,7 @@ public class LisaaHarjoiteServlet extends HttpServlet {
             sb.append("Tarkista, että syke on ilmoitettu luvulla. ");
         }
          if(0>syke) sb.append("Syke ei voi olla negatiivinen. ");
-        // TODO: parse päiväys kuntoon
+        
         Harjoite uusi ;
         if(sb.length()==0){
             uusi = new Harjoite(kayttaja, laji, paivays, kestoMinuuteissa, kommentti, syke);
@@ -66,6 +66,7 @@ public class LisaaHarjoiteServlet extends HttpServlet {
             request.setAttribute("sykeApu", "");
             request.setAttribute("kommenttiApu", "");
             request.setAttribute("paivays", dateFormat.format(calendar.getTime()));
+            request.setAttribute("varoitus", "Harjoite lisätty.");
         }
         else{
             request.setAttribute("varoitus", sb.toString());

@@ -40,24 +40,48 @@
             </form>      
         </c:if>
 
-        <h2>Uusi ruoka</h2>
+            <script type="text/javascript">
+                <!--//
+                function addElements() {
+                    var ni = document.getElementById('myDiv');
+                    var numi = document.getElementById('theValue');
+                    var num = (document.getElementById('theValue').value -1)+ 2;
+                    numi.value = num;
+                    var newdiv = document.createElement('div');
+                    var divIdName = 'my'+num+'Div';
+                    newdiv.setAttribute('id',divIdName);
+                    newdiv.innerHTML = 'Määrä: ';
+                    var newlista = document.getElementById('lista');
+                    var uusilista = newlista.cloneNode(true);
+                    var newmaara = document.createElement('input');
+                    //var sata = '*100g -->';
+                    newdiv.appendChild(newmaara);
+                    newdiv.appendChild(uusilista);
+                    //newdiv.appendChild(sata);
+                    ni.appendChild(newdiv) 
+                    //-->
+            </script>
+
+            <h2>Uusi ruoka</h2>
        
         <form name="uusiRuoka"
               action="${pageContext.request.contextPath}/LisaaRuoka"
               method="post">
-            Nimi: <input type="text" name="nimi" /> <br/>
-            Määrä: <input type="text" name="maara" /> *100g -->
+            Nimi: <input type="text" name="nimi" value="${ruoannimiApu}" id="nimi"/> <br/>
+            Määrä: <input type="text" name="maara" value="${maaraApu}" id="maara"/> *100g -->
             Raaka-aine:
-            <select name="raakaaineId">
+            <select name="raakaaineId" id="lista">
                 <c:forEach var="raakaaine" items="${listaRaakaaine}">
                     <option value="${raakaaine.id}">${raakaaine.nimi}</option>
                 </c:forEach>
             </select>
-            <input type="button" value="Lisää" onclick=""/><br/>
+            <input type="hidden" value="0" id="theValue" />
+             <div id="myDiv"> </div>
+             <input type="button" value="Lisää" onclick="addElements()"/><br/> 
                         
             <input type="submit" name="Lähetä"/>
         </form>
-        
+        <p>${varoitus}</p>
 
         <h2>Uusi raaka-aine</h2>
         <form name="uusiRaakaaine"
