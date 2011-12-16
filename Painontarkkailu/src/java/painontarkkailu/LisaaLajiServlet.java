@@ -1,19 +1,13 @@
 package painontarkkailu;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet lisää lajin tietokantaan ja tarkastaa lomakkeen oikeellisuuden.
  * @author Hannu Päiveröinen
  */
 public class LisaaLajiServlet extends HttpServlet {

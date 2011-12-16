@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.Serializable;
@@ -15,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
- *
+ * Luokka sisältää ruokaaineen taulun konstruktiot sekä getterit ja setterit
  * @author Hannu Päiveröinen
  */
 @Entity

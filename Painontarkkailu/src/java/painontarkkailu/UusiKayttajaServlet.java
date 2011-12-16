@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.IOException;
@@ -13,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet hallinnoi uusiKayttaja.jsp-sivua
  * @author Hannu Päiveröinen
  */
 public class UusiKayttajaServlet extends HttpServlet {

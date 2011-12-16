@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package painontarkkailu;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 /**
- *
+ * Luokka sisältää Laji taulun konstruktiot sekä getterit ja setterit
  * @author Hannu Päiveröinen
  */
 
